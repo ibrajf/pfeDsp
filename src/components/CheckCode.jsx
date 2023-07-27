@@ -37,7 +37,7 @@ const CheckCode = () => {
           <Image src={logo} h={100} w="100%" alt="Logo Thetiptop" />
         </Box>
         <Box textAlign="center" mb={4}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere lacus euismod lacus consequat efficitur.
+          FROM LOCAL
         </Box>
         <Input placeholder="Enter your code" mb={4} maxW="150px" onChange={e => setCodeInput(e.target.value)} />
         <Button colorScheme="blue" size="md" onClick={handlesubmit}>
