@@ -10,7 +10,7 @@ const Footer = () => {
           <Link href={"#"}>Quelques chose ne fonctionne pas ? Clique ici</Link>
           <Link href={"/faq"}>FAQ</Link>
         </Stack>
-        <Text>© 2023 FuriousDuckss</Text>
+        <Text>© 2023 FuriousDucks</Text>
       </Container>
     </Box>
   )
