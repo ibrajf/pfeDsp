@@ -6,7 +6,7 @@ const Footer = () => {
       <Container as={Stack} maxW={"6xl"} py={4} direction={{ base: "column", md: "row" }} spacing={4} justify={{ base: "center", md: "space-between" }} align={{ base: "center", md: "center" }}>
         <Stack direction={"row"} spacing={6}>
           <Link href={"/blog"}>Blog</Link>
-          <Link href={"#"}>Conditions</Link>
+          <Link href={"/contitions"}>Conditions</Link>
           <Link href={"#"}>Quelques chose ne fonctionne pas ? Clique ici</Link>
           <Link href={"/faq"}>FAQ</Link>
         </Stack>

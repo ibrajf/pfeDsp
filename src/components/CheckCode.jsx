@@ -12,7 +12,7 @@ const CheckCode = () => {
 
   const handlesubmit = () => {
     if (codeInput === user.code) {
-      navigate("/blog")
+      navigate("/historique")
     } else {
       setErrorMessage("Code incorrect. Veuillez réessayer.")
     }
