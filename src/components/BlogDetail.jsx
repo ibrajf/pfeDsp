@@ -1,6 +1,6 @@
 import React from "react"
 import { Center, Box, Text, Image } from "@chakra-ui/react"
-import Header from "./Header"
+// import Header from "./Header"
 import Hero from "./Hero"
 
 const BlogDetail = ({ title, content, image }) => {

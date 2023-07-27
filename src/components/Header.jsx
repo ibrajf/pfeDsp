@@ -1,7 +1,7 @@
 import logo from "./images/logo.png"
 import { FiPlusCircle, FiLogOut, FiSettings } from "react-icons/fi"
 
-import { Box, Flex, Avatar, Menu, Button, MenuButton, MenuList, MenuItem, MenuDivider, useColorModeValue, Stack, useColorMode, Center, Image } from "@chakra-ui/react"
+import { Box, Flex, Avatar, Menu, Button, MenuButton, MenuList, MenuItem, MenuDivider, useColorModeValue, Stack, useColorMode, Center, Image, Link } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 
 export default function Nav() {
@@ -19,7 +19,7 @@ export default function Nav() {
             </Stack>
           </Box>
           <Box>
-            <Image src={`${logo}`} alt="Logo ThéTipTop" w="170px" />
+            <Link href='./historique'><Image src={`${logo}`} alt="Logo ThéTipTop" w="170px" /></Link>
           </Box>
 
           <Flex alignItems={"center"}>
