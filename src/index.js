@@ -12,6 +12,8 @@ import CheckCode from "./components/CheckCode"
 import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Faq from "./components/Faq"
+import ContactUs from "./components/ContactUs"
+import CookieConsent from "./components/CookieConsent"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,9 +25,11 @@ ReactDOM.render(
             <Route path="/blog" element={<Blog />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/historique" element={<Historique />} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/" element={<CheckCode />} />
           </Routes>
+          <CookieConsent />
         </Layout>
       </Router>
     </ChakraProvider>

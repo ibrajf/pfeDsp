@@ -7,7 +7,7 @@ const Footer = () => {
         <Stack direction={"row"} spacing={6}>
           <Link href={"/blog"}>Blog</Link>
           <Link href={"/contitions"}>Conditions</Link>
-          <Link href={"#"}>Quelques chose ne fonctionne pas ?</Link>
+          <Link href={"/contact"}>Quelques chose ne fonctionne pas ?</Link>
           <Link href={"/faq"}>FAQ</Link>
         </Stack>
         <Text>© 2023 FuriousDucks</Text>
