@@ -37,7 +37,7 @@ const CheckCode = () => {
           <Image src={logo} h={100} w="100%" alt="Logo Thetiptop" />
         </Box>
         <Box textAlign="center" mb={4}>
-          FROM LOCAL Second time
+          FROM LOCAL Second time eeeeeeeeeeeee
         </Box>
         <Input placeholder="Enter your code" mb={4} maxW="150px" onChange={e => setCodeInput(e.target.value)} />
         <Button colorScheme="blue" size="md" onClick={handlesubmit}>
