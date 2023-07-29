@@ -1,8 +1,8 @@
 import logo from "./images/logo.png"
 import { FiPlusCircle, FiLogOut, FiSettings } from "react-icons/fi"
-
 import { Box, Flex, Avatar, Menu, Button, MenuButton, MenuList, MenuItem, MenuDivider, useColorModeValue, Stack, useColorMode, Center, Image, Link } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
+import AddCodeModal from "./AddCode"
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -13,9 +13,7 @@ export default function Nav() {
         <Flex h={99} alignItems={"center"} justifyContent={"space-between"}>
           <Box alt="Composer un code">
             <Stack direction="row">
-              <Button color={useColorModeValue("whiteAlpha.900", "#995414")} bg={useColorModeValue("#995414", "whiteAlpha.900")}>
-                <FiPlusCircle />
-              </Button>
+              <AddCodeModal />
             </Stack>
           </Box>
           <Box>
