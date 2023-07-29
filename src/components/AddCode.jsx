@@ -1,25 +1,7 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button,
-  useColorModeValue,
-  FormControl,
-  FormLabel,
-  Input
-} from '@chakra-ui/react'
-import { Field, Form, Formik } from 'formik';
-import { FiPlusCircle} from "react-icons/fi"
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Button, useColorModeValue } from "@chakra-ui/react"
+import { FiPlusCircle } from "react-icons/fi"
 
-import FormikExample from "./AddCode Form"
-
-
-
+import ModalCode from "./ModalCode"
 
 function AddCodeModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -36,9 +18,7 @@ function AddCodeModal() {
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-          
-            <FormikExample />
-
+            <ModalCode />
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>Close</Button>
