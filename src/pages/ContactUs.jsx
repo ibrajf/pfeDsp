@@ -1,8 +1,7 @@
-import logo from "./images/logo.png"
 import { Link, Image, Container, Flex, Box, Text, Button, VStack, Wrap, WrapItem, FormControl, FormLabel, Input, InputGroup, InputLeftElement, Textarea } from "@chakra-ui/react"
 import { MdPhone, MdEmail, MdLocationOn, MdOutlineEmail } from "react-icons/md"
 import { BsPerson } from "react-icons/bs"
-
+import logo from "../images/logo.png"
 export default function ContactUs() {
   return (
     <Container bg="white" maxW="full" mt={0} centerContent overflow="hidden">

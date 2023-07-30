@@ -1,10 +1,10 @@
 import React from "react"
 import { Center, Box, SimpleGrid } from "@chakra-ui/react"
 // import Header from "./Header"
-import "../App.css" // Import the CSS file for BlogPage
-import articles from "../services/articles"
-import BlogCards from "./cards/BlogCards"
-import Hero from "./Hero"
+import "../../App.css" // Import the CSS file for BlogPage
+import articles from "../../services/articles"
+import BlogCards from "../../components/cards/BlogCards"
+import Hero from "../../components/shared/Hero"
 
 const Blog = () => {
   return (

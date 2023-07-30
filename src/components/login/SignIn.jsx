@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc"
 
 function SignIn() {
   return (
-    <Box maxWidth="400px" mx="auto" mt="100px">
+    <Box maxWidth="400px" mx="auto" mt="20px">
       <Heading marginBottom="20px">Sign In</Heading>
       <form>
         <Stack spacing="20px">

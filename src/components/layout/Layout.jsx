@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
-import Footer from "./Footer"
-import Header from "./Header"
+import Footer from "../shared/Footer"
+import Header from "../shared/Header"
 
 const Layout = ({ children }) => {
   const location = useLocation()
