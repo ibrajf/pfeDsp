@@ -1,10 +1,10 @@
 import { React, useState } from "react"
-import logo from "./images/logo.png"
+import logo from "../../images/logo.png"
 import { Box, Image, Input, Button, Flex } from "@chakra-ui/react"
-import { user } from "../services/user"
+import { user } from "../../services/user"
 // import { useNavigate } from "react-router-dom"
-import SignIn from "../components/SignIn"
-import SignUp from "../components/SignUp"
+import SignIn from "../login/SignIn"
+import SignUp from "../login/SignUp"
 
 function CheckCodeForm() {
   // const navigate = useNavigate()

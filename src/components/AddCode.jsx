@@ -1,7 +1,7 @@
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Button, useColorModeValue } from "@chakra-ui/react"
 import { FiPlusCircle } from "react-icons/fi"
 
-import ModalCode from "./ModalCode"
+import ModalCode from "./modals/ModalCode"
 
 function AddCodeModal() {
   const { isOpen, onOpen, onClose } = useDisclosure()

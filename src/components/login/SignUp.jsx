@@ -4,7 +4,7 @@ function SignUp() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box maxWidth="400px" mx="auto" mt="100px">
+    <Box maxWidth="400px" mx="auto" mt="20px">
       <Heading marginBottom="20px">Sign Up</Heading>
       <Button colorScheme="teal" onClick={onOpen}>
         Sign Up

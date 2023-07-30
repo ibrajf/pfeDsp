@@ -2,7 +2,6 @@
 export const user = {
   username: "exampleUser",
   code: "123456"
-};
+}
 
-export const jsonUser = JSON.stringify(user);
-
+export const jsonUser = JSON.stringify(user)

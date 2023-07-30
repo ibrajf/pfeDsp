@@ -1,7 +1,7 @@
 import React from "react"
 import { useParams } from "react-router-dom"
-import articles from "../../services/articles"
-import BlogDetail from "../BlogDetail"
+import articles from "../../../services/articles"
+import BlogDetail from "../../../components/BlogDetail"
 import { Box } from "@chakra-ui/react"
 
 const Blogdetails = () => {

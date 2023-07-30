@@ -2,19 +2,20 @@ import React from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 import { ChakraProvider } from "@chakra-ui/react"
-import Layout from "./components/Layout"
+import Layout from "./components/layout/Layout"
 import theme from "./theme"
 
-import Blog from "./components/Blog"
 import Historique from "./components/Historique"
-import Blogdetails from "./components/details/Blogdetails"
-import CheckCode from "./components/CheckCode"
+import Blogdetails from "./pages/blog/details/Blogdetails"
+import CheckCode from "./pages/CheckCode"
 import Addcode from "./components/AddCode"
-import reportWebVitals from "./reportWebVitals"
+// import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Faq from "./components/Faq"
-import ContactUs from "./components/ContactUs"
+import Faq from "./pages/Faq"
+
 import CookieConsent from "./components/CookieConsent"
+import Blog from "./pages/blog/Blog"
+import ContactUs from "./pages/ContactUs"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -39,4 +40,4 @@ ReactDOM.render(
   document.getElementById("root")
 )
 
-reportWebVitals()
+// reportWebVitals()
