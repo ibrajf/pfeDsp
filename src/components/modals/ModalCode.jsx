@@ -1,45 +1,63 @@
-import { Field, Form, Formik } from "formik"
-import { FormControl, FormLabel, FormErrorMessage, Input, Button } from "@chakra-ui/react"
+import { Field, Form, Formik } from 'formik';
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  Input,
+  IconButton,
+  Button,
+} from '@chakra-ui/react';
+import { FiPlusCircle} from "react-icons/fi"
 
-function ModalCode() {
-  function validateName(value) {
-    let error
+function FormikExample({ onClose }) {
+  function validateCode(value) {
+    let error;
     if (!value) {
-      error = "Name is required"
-    } else if (value.toLowerCase() !== "naruto") {
-      error = "Jeez! You're not a fan 😱"
+      error = 'Un code est requis';
+    } else if (value.length !== 10) {
+      error = 'Veuillez entrer un code de 10 chiffres SVP';
     }
-    return error
+    return error;
   }
 
   return (
     <Formik
-      initialValues={{ name: "Sasuke" }}
+      initialValues={{ name: '' }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          actions.setSubmitting(false)
-        }, 1000)
+          // Add any form submission logic here if needed
+
+          // Close the modal after form submission
+
+          actions.setSubmitting(false);
+        }, 1000);
       }}
     >
-      {props => (
+      {(props) => (
         <Form>
-          <Field name="name" validate={validateName}>
+          <Field name='name' validate={validateCode}>
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.name && form.touched.name}>
-                <FormLabel>First name</FormLabel>
-                <Input {...field} placeholder="name" />
+                <FormLabel>Composer votre code</FormLabel>
+                <Input {...field} placeholder='Code de 10 caractère' />
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
-          <Button mt={4} colorScheme="teal" isLoading={props.isSubmitting} type="submit">
-            Submit
+          <Button
+            mt={4}
+            bgColor='#995414'
+            color='white'
+            isLoading={props.isSubmitting}
+            type='submit'
+            icon={props.isSubmitting ? <FiPlusCircle /> : undefined}
+          >
+            Gagnez tout de suite
           </Button>
         </Form>
       )}
     </Formik>
-  )
+  );
 }
 
-export default ModalCode
+export default FormikExample;
