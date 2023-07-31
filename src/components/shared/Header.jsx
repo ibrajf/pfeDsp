@@ -9,7 +9,7 @@ export default function Nav() {
   // const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Box bg={useColorModeValue("#FFFAF0", "gray.900")} px={5}>
+      <Box bg={useColorModeValue("#FFFAF0", "gray.900")} px={5} w="100%">
         <Flex h={99} alignItems={"center"} justifyContent={"space-between"}>
           <Box alt="Composer un code">
             <Stack direction="row">
