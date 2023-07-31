@@ -1,7 +1,12 @@
 import React from "react"
+import NotreHistoire from "../components/NotreHistoire"
 
-function App() {
-  return <></>
+function Home() {
+  return (
+    <>
+      <NotreHistoire />
+    </>
+  )
 }
 
-export default App
+export default Home

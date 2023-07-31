@@ -16,6 +16,7 @@ import Faq from "./pages/Faq"
 import CookieConsent from "./components/CookieConsent"
 import Blog from "./pages/blog/Blog"
 import ContactUs from "./pages/ContactUs"
+import NotreHistoire from "./components/NotreHistoire"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.render(
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
             <Route path="/blog" element={<Blog />} />
+            <Route path="/home" element={<NotreHistoire />} />
             <Route path="/faq" element={<Faq />} />
             <Route path="/historique" element={<Historique />} />
             <Route path="/contact" element={<ContactUs />} />
