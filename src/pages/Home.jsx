@@ -90,7 +90,7 @@ function Home() {
           icon={<Icon as={FcInTransit} w={10} h={10} />}
           title={'Instant Delivery'}
           text={
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore...'
+            'Lorem ipsu dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore...'
           }
         />
       </SimpleGrid>
