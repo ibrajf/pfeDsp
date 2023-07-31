@@ -8,6 +8,7 @@ import theme from "./theme"
 import Historique from "./components/Historique"
 import Blogdetails from "./pages/blog/details/Blogdetails"
 import CheckCode from "./pages/CheckCode"
+import Home from "./pages/Home"
 import Addcode from "./components/AddCode"
 // import reportWebVitals from "./reportWebVitals"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -31,6 +32,7 @@ ReactDOM.render(
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/Addcode" element={<Addcode />} />
             <Route path="/" element={<CheckCode />} />
+            <Route path="/Home" element={<Home />} />
           </Routes>
           <CookieConsent />
         </Layout>
