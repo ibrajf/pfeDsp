@@ -5,6 +5,10 @@ body {
   font-family: "Montserrat Alternates", sans-serif;
 }
 
+.logoImage {
+  width: 50%;
+}
+
 /* .App {
   text-align: center;
 }
