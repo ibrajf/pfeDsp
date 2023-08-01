@@ -1,6 +1,7 @@
 import logo from "../../images/logo.png"
 import { Box, Image, Flex } from "@chakra-ui/react"
 import React from "react"
+import "../../index"
 
 const CheckCodeImage = () => {
   return (

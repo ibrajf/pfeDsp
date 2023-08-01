@@ -31,19 +31,28 @@ const CheckCodeForm = () => {
 
   const renderCodeForm = () => (
     <>
-      <Input placeholder="Enter your code" mb={4} maxW="150px" onChange={handleInput} />
-      <Button colorScheme="blue" size="md" onClick={handleSubmit}>
-        Participer
-      </Button>
-      {errorMessage && <Box>{errorMessage}</Box>}
+      <Box display="flex" justifyContent="center">
+        <Input placeholder="Code : T8744440" mb={4} maxW="300px" onChange={handleInput} />
+      </Box>
+      <Box display="flex" justifyContent="center">
+        <Button colorScheme="blue" size="md" onClick={handleSubmit} width="300px">
+          Participer
+        </Button>
+      </Box>
+
+      {errorMessage && (
+        <Box display="flex" justifyContent="center">
+          {errorMessage}
+        </Box>
+      )}
     </>
   )
 
   return (
-    <Box p={4} overflow="hidden" display="flex" flexDirection="column">
-      <Flex>
+    <Box p={4} overflow="hidden" display="flex" flexDirection="column" bgColor="red" w="60%">
+      <Flex justifyContent="center">
         <Box>
-          <Image src={logo} alt="Logo Thetiptop" />
+          <Image w="75%" src={logo} alt="Logo Thetiptop" />
         </Box>
       </Flex>
 
