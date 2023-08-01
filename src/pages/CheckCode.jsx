@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/react"
-import CheckCodeImage from "../components/checkCode/CheckCodeImage"
+import checkcodeImage from "../images/checkCode.jpg"
+// import CheckCodeImage from "../components/checkCode/CheckCodeImage"
 import CheckCodeForm from "../components/checkCode/CheckCodeForm"
 
 const CheckCode = () => {
   return (
-    <Flex align="center" justify="center" flexDirection={{ base: "column", md: "row" }} maxHeight="calc(100vh - 60px)" overflow="hidden">
-      <CheckCodeImage />
+    <Flex bgImage={`url(${checkcodeImage})`} bgSize="cover" height="85vh" display="flex" justifyContent="center">
       <CheckCodeForm />
     </Flex>
   )
