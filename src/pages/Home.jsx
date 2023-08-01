@@ -1,10 +1,16 @@
 import React from "react"
-import NotreHistoire from "../components/NotreHistoire"
+import WithBackgroundImage from "../components/Home/Home_hero"
+import SimpleThreeColumns from "../components/Home/Home_features"
+import WithSpeechBubbles from "../components/Home/Home_notices"
+import Simple from "../components/Home/Home_newsletters.tsx"
 
 function Home() {
   return (
     <>
-      <NotreHistoire />
+      <WithBackgroundImage />
+      <SimpleThreeColumns/>
+      <WithSpeechBubbles/>
+      <Simple/>
     </>
   )
 }

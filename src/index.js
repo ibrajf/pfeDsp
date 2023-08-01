@@ -25,7 +25,7 @@ ReactDOM.render(
       <Router>
         <Layout>
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/Home" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/home" element={<NotreHistoire />} />
             <Route path="/faq" element={<Faq />} />
@@ -34,7 +34,6 @@ ReactDOM.render(
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/Addcode" element={<Addcode />} />
             <Route path="/" element={<CheckCode />} />
-            <Route path="/Home" element={<Home />} />
           </Routes>
           <CookieConsent />
         </Layout>
