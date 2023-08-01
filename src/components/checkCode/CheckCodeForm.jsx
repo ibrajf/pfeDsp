@@ -49,7 +49,7 @@ const CheckCodeForm = () => {
   )
 
   return (
-    <Box p={4} overflow="hidden" display="flex" flexDirection="column" bgColor="red" w="60%">
+    <Box p={4} overflow="hidden" alignSelf={'center'} justifySelf={'center'} justifyContent={'center'} display="flex" flexDirection="column" bgColor="#FFFAF0" w="45%" h='92%' ml={'35%'} boxShadow={'xl'} borderRadius={10} >
       <Flex justifyContent="center">
         <Box>
           <Image w="75%" src={logo} alt="Logo Thetiptop" />
