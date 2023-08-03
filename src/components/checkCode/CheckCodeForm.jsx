@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import logo from "../../images/logo.png"
-import { Box, Input, Button, Flex, Image } from "@chakra-ui/react"
+import { Box, Input, Button, Flex, Image, useColorModeValue } from "@chakra-ui/react"
 import { user } from "../../services/user"
 import SignIn from "../login/SignIn"
 import SignUp from "../login/SignUp"
@@ -49,15 +49,15 @@ const CheckCodeForm = () => {
   )
 
   return (
-    <Box p={4} overflow="hidden" alignSelf={'center'} justifySelf={'center'} justifyContent={'center'} display="flex" flexDirection="column" bgColor="#FFFAF0" w="45%" h='92%' ml={'35%'} boxShadow={'xl'} borderRadius={10} >
-      <Flex justifyContent="center">
+    <Box p={4} overflow="hidden" alignSelf={'center'} justifySelf={'center'} justifyContent={'center'} display="flex" flexDirection="column" bg={useColorModeValue("#FFFAF0", "gray.900")} w={{ base: "80%", sm: "45%" }} h='92%' ml={{ base: "0", sm: "35%" }} boxShadow={'xl'} borderRadius={10} >
+      {/* <Flex justifyContent="center">
         <Box>
           <Image w="75%" src={logo} alt="Logo Thetiptop" />
         </Box>
-      </Flex>
+      </Flex> */}
 
-      <Box textAlign="center" mb={4}>
-        FROM LOCAL Second time
+      <Box textAlign="center" m={5}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque delectus autem at eius veniam consequuntur facere animi.
       </Box>
 
       {!showAuth ? renderCodeForm() : renderAuthForm()}

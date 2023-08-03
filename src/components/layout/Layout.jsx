@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom"
 import Footer from "../shared/Footer"
 import Header from "../shared/Header"
-import { Grid, GridItem, Flex, Box } from "@chakra-ui/react"
+import CheckCodeHeader from "../checkCode/CheckCodeHeader"
+import { Grid, GridItem, Flex } from "@chakra-ui/react"
 
 const Layout = ({ children }) => {
   const location = useLocation()
-  const isCheckCodePage = location.pathname === "/" // Set this to true or false based on your page check logic
+  const isCheckCodePage = location.pathname === "/checkcode" // Set this to true or false based on your page check logic
 
   return (
     <Grid
@@ -22,7 +23,7 @@ const Layout = ({ children }) => {
       {isCheckCodePage ? (
         <GridItem bg="orange.300" area={"header"}>
           <Flex w="100%" h="100%" alignItems="center" justifyContent="center">
-            <Box>This is the alternative content</Box>
+            <CheckCodeHeader/>
           </Flex>
         </GridItem>
       ) : (
