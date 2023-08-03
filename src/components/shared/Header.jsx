@@ -28,12 +28,12 @@ export default function Nav() {
 
               <Menu>
                 <MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
-                  <Avatar size={"sm"} src={"https://avatars.dicebear.com/api/male/username.svg"} />
+                  <Avatar size={"md"} src={"https://cdn-icons-png.flaticon.com/512/6596/6596121.png"} />
                 </MenuButton>
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
-                    <Avatar size={"2xl"} src={"https://avatars.dicebear.com/api/male/username.svg"} />
+                    <Avatar size={"2xl"} src={"https://cdn-icons-png.flaticon.com/512/6596/6596121.png"} />
                   </Center>
                   <br />
                   <Center>
@@ -41,7 +41,7 @@ export default function Nav() {
                   </Center>
                   <br />
                   <MenuDivider />
-                  <MenuItem icon={<FiSettings />}>Configuration </MenuItem>
+                  <Link href="/Configuration"><MenuItem icon={<FiSettings />}>Configuration </MenuItem></Link>
                   <MenuItem icon={<FiLogOut />}>Se déconnecter</MenuItem>
                 </MenuList>
               </Menu>
