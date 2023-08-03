@@ -1,4 +1,4 @@
-import { Stack, Flex, Button, Text, VStack, useBreakpointValue } from '@chakra-ui/react'
+import { Stack, Flex, Button, Text, VStack, useBreakpointValue, Link } from '@chakra-ui/react'
 import homeBg from "../../images/homeBg.jpeg"
 
 export default function WithBackgroundImage() {
@@ -24,13 +24,15 @@ export default function WithBackgroundImage() {
             Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
           </Text>
           <Stack direction={'row'}>
-            <Button
-              bg={'whiteAlpha.300'}
-              rounded={'full'}
-              color={'white'}
-              _hover={{ bg: 'whiteAlpha.500' }}>
-              Particper Maintenant !
-            </Button>
+            <Link href='/checkcode'>
+              <Button
+                bg={'whiteAlpha.300'}
+                rounded={'full'}
+                color={'white'}
+                _hover={{ bg: 'whiteAlpha.500' }}>
+                Particper Maintenant !
+              </Button>
+            </Link>
           </Stack>
         </Stack>
       </VStack>

@@ -17,7 +17,7 @@ export default function Nav() {
             </Stack>
           </Box>
           <Box>
-            <Link href="./historique">
+            <Link href="/">
               <Image src={`${logo}`} alt="Logo ThéTipTop" w="170px" />
             </Link>
           </Box>
