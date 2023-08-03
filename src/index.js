@@ -16,6 +16,7 @@ import Faq from "./pages/Faq"
 import CookieConsent from "./components/CookieConsent"
 import Blog from "./pages/blog/Blog"
 import ContactUs from "./pages/ContactUs"
+import Configuration from "./pages/Configuration"
 import NotreHistoire from "./components/NotreHistoire"
 
 ReactDOM.render(
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/Checkcode" element={<Checkcode />} />
+            <Route path="/Configuration" element={<Configuration />} />
           </Routes>
           <CookieConsent />
         </Layout>
