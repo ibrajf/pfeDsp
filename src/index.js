@@ -18,6 +18,7 @@ import Blog from "./pages/blog/Blog"
 import ContactUs from "./pages/ContactUs"
 import Configuration from "./pages/Configuration"
 import NotreHistoire from "./components/NotreHistoire"
+import PageError from "./pages/PageError"
 
 ReactDOM.render(
   <React.StrictMode>
@@ -34,6 +35,7 @@ ReactDOM.render(
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/Checkcode" element={<Checkcode />} />
             <Route path="/Configuration" element={<Configuration />} />
+            <Route path="*" element={<PageError />} />
           </Routes>
           <CookieConsent />
         </Layout>
