@@ -10,7 +10,7 @@ function NotFoundPage() {
       </Box>
       <Box maxWidth="sm" fontWeight="bold">
         {" "}
-        OUPS PAGE NON TROUVER
+        OUPSSS PAGE NON TROUVER...
       </Box>
       <Box mt="20px" textDecoration="underline">
         <Link to="/">Retourner a l'accueil</Link>
