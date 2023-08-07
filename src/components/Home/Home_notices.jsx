@@ -100,50 +100,41 @@ export default function WithSpeechBubbles() {
         >
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Efficient Collaborating</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed
-                imperdiet nibh lectus feugiat nunc sem.
+                Jouer et gagner avec ThéTipTop, c'est un plaisir ! J'adore les récompenses théinées, c'est une super idée.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
               src={
                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
               }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              name={'Victor'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Intuitive Design</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed
-                imperdiet nibh lectus feugiat nunc sem.
+              Gagner un coffret découverte d'une valeur de 39€ grâce au jeu-concours ThéTipTop, c'est un vrai plaisir pour les papilles.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
               src={
                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
               }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              name={'Sofia'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Mindblowing Service</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed
-                imperdiet nibh lectus feugiat nunc sem.
+                Votre jeu-concours est tellement généreux ! J'ai été surprise de remporter un infuseur à thé et je l'adore.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
               src={
                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
               }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              name={'Anis'}
             />
           </Testimonial>
         </Stack>

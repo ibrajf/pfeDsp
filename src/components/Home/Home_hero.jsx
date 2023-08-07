@@ -21,7 +21,7 @@ export default function WithBackgroundImage() {
             lineHeight={1.2}
             align={'center'}
             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+            Jouez pour découvrir des arômes inattendus et des récompenses gourmandes!
           </Text>
           <Stack direction={'row'}>
             <Link href='/checkcode'>
