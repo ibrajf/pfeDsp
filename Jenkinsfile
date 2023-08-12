@@ -11,17 +11,17 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
 
-                    docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                        docker.build(imageName, '-f /home/myApp/frontend/Dockerfile .')
-                    }
-                }
-            }
-        }
+        //             docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+        //                 docker.build(imageName, '-f /home/myApp/frontend/Dockerfile .')
+        //             }
+        //         }
+        //     }
+        // }
 
         // stage('Deploy to Preprod') {
         //     steps {
