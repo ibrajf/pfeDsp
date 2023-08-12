@@ -1,7 +1,16 @@
 import { Stack, Flex, Button, Text, VStack, useBreakpointValue, Link } from '@chakra-ui/react'
 import homeBg from "../../images/homeBg.jpeg"
+import useAnalyticsEventTracker from '../../useAnalyticsEventTracker'; // Import the hook
 
 export default function WithBackgroundImage() {
+
+  const trackButtonClick = useAnalyticsEventTracker("Button Click", "Participer Maintenant Click"); // Initialize the hook
+
+  const handleButtonClick = () => {
+    trackButtonClick("Button Click", "Participer Maintenant Click"); // Track the event
+    // Any other logic you want to execute on button click
+  };
+
   return (
     <Flex
       w={'full'}
@@ -25,11 +34,13 @@ export default function WithBackgroundImage() {
           </Text>
           <Stack direction={'row'}>
             <Link href='/checkcode'>
-              <Button
+            <Button
                 bg={'whiteAlpha.300'}
                 rounded={'full'}
                 color={'white'}
-                _hover={{ bg: 'whiteAlpha.500' }}>
+                _hover={{ bg: 'whiteAlpha.500' }}
+                onClick={handleButtonClick} // Attach the tracking function to onClick event
+              >
                 Particper Maintenant !
               </Button>
             </Link>
