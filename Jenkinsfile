@@ -9,7 +9,7 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
             }
         }
-        
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -17,7 +17,7 @@ pipeline {
                     
                     // Build and push the Docker image 
                     docker.image('node:14').inside('-u root') {
-                        sh "cd ../home/myApp/frontend && docker build -t ${imageName} -f Dockerfile ."
+                        sh "cd home/myApp/frontend && docker build -t ${imageName} -f Dockerfile ."
                         sh "docker push ${imageName}"
                     }
                 }
