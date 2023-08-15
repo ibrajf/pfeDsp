@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy to Preprod') {
             steps {
                 script {
-                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+                    def imageName = "devopsgroupe4/Preprod-myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
                     def preprodContainerName = 'myapp-preprod'
                     def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:${appVersion}-${env.GIT_COMMIT}"
 
@@ -54,7 +54,7 @@ pipeline {
         stage('Deploy to Prod') {
             steps {
                 script {
-                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+                    def imageName = "devopsgroupe4/Prod-myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
                     def prodContainerName = 'myapp'
                     def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
 
