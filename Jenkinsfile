@@ -68,7 +68,7 @@ pipeline {
                         image.push("${prodTag}")
                     }
 
-                    // Deployment commands for Prod
+                    // Deployment commands for Prod 
                     sh "docker stop ${prodContainerName}  true"
                     sh "docker rm ${prodContainerName}  true"
                     sh "docker run -d --name ${prodContainerName} -p 80:80 ${prodImageName}"
