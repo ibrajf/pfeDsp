@@ -9,14 +9,7 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
             }
         }
-
-        stage('Debugging') {
-            steps {
-                script {
-                    sh "pwd"
-                }
-            }
-        }
+        
         stage('Build Docker Image') {
             steps {
                 script {
