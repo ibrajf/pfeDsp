@@ -10,6 +10,13 @@ pipeline {
             }
         }
 
+        stage('Debugging') {
+            steps {
+                script {
+                    sh "pwd"
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -23,13 +30,7 @@ pipeline {
                 }
             }
         }
-        stage('Debugging') {
-            steps {
-                script {
-                    sh "pwd"
-                }
-            }
-        }
+        
 
         // stage('Deploy to Preprod') {
         //     steps {
