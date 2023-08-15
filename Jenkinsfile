@@ -1,3 +1,5 @@
+def appVersion = '1.0.0'
+
 pipeline {
     agent any
 
