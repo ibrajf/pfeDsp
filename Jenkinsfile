@@ -15,7 +15,7 @@ pipeline {
                 script {
                     def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
                     
-                    // Build and push the Docker image
+                    // Build and push the Docker image 
                     docker.image('node:14').inside('-u root') {
                         sh "cd . && docker build -t ${imageName} -f Dockerfile ."
                         sh "docker push ${imageName}"
