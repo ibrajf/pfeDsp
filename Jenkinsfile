@@ -17,7 +17,7 @@ pipeline {
                     
                     // Build and push the Docker image 
                     docker.image('node:14').inside('-u root') {
-                        sh "cd home/myApp/frontend && docker build -t ${imageName} -f Dockerfile ."
+                        sh "sudo cd home/myApp/frontend && docker build -t ${imageName} -f Dockerfile ."
                         sh "docker push ${imageName}"
                     }
                 }
