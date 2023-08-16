@@ -3,27 +3,7 @@ def appVersion = '1.0.0'
 pipeline {
     agent any
 
-    environment {
-        NVM_DIR = "/var/lib/jenkins/.nvm"
-        NVM_PATH = "$NVM_DIR/nvm.sh"
-        NODE_VERSION = "16.13.0"
-    }
-
     stages {
-        stage('Prepare Environment') {
-            steps {
-                script {
-                    // Install NVM
-                    sh "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
-                    sh ". $NVM_DIR/nvm.sh"  // Use the dot command instead of source
-
-                    // Install the required Node.js version
-                    sh ". $NVM_PATH"  // Load nvm script
-                    sh "bash -c 'source $NVM_PATH && nvm install $NODE_VERSION'"
-                }
-            }
-        }
-
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
@@ -34,16 +14,16 @@ pipeline {
             steps {
                 // Install dependencies
                 sh 'npm install'
-
+                
                 // Run unit tests
                 sh 'npm test'
-
+                
                 // Run integration tests (if applicable)
                 sh 'npm run integration-test' // or 'yarn run integration-test'
-
+                
                 // Run end-to-end tests (if applicable)
                 sh 'npm run e2e-test'
-
+                
                 // Perform other test-related tasks (linting, etc.)
                 sh 'npm run lint'
             }
