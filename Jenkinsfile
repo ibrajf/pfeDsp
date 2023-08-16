@@ -10,7 +10,7 @@ pipeline {
             }
         }
 
-       stage('Run Tests') {
+        stage('Run Tests') {
             steps {
                 // Install dependencies
                 sh 'npm install'
@@ -28,7 +28,6 @@ pipeline {
                 sh 'npm run lint'
             }
         }
-
 
 
 
