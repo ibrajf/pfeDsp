@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Install NVM
-                    sh "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
+                    sh "curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash"
                     sh "source $NVM_DIR/nvm.sh"
 
                     // Install the required Node.js version
