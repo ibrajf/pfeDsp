@@ -13,7 +13,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Install dependencies
-                
+                sh 'npm update'
                 
                 // Run unit tests
                 sh 'npm test'
