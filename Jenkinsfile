@@ -11,7 +11,7 @@ pipeline {
         }
 
         stage('Run Tests') {
-            parallel {
+            
                 stage('Install Dependencies') {
                     steps {
                         // Use npm ci for faster, consistent installations
@@ -42,7 +42,7 @@ pipeline {
                         sh 'npm run lint'
                     }
                 }
-            }
+            
         }
 
 
