@@ -11,39 +11,24 @@ pipeline {
         }
 
         stage('Run Tests') {
-            
-                stage('Install Dependencies') {
-                    steps {
-                        // Use npm ci for faster, consistent installations
-                        sh 'npm ci'
-                    }
-                }
-
-                stage('Run Unit Tests') {
-                    steps {
-                        sh 'npm test'
-                    }
-                }
-
-                stage('Run Integration Tests') {
-                    steps {
-                        sh 'npm run integration-test'
-                    }
-                }
-
-                stage('Run End-to-End Tests') {
-                    steps {
-                        sh 'npm run e2e-test'
-                    }
-                }
-
-                stage('Linting') {
-                    steps {
-                        sh 'npm run lint'
-                    }
-                }
-            
+            steps {
+                // Install dependencies
+                sh 'npm install'
+                
+                // Run unit tests
+                sh 'npm test'
+                
+                // Run integration tests (if applicable)
+                sh 'npm run integration-test' // or 'yarn run integration-test'
+                
+                // Run end-to-end tests (if applicable)
+                sh 'npm run e2e-test'
+                
+                // Perform other test-related tasks (linting, etc.)
+                sh 'npm run lint'
+            }
         }
+
 
 
 
