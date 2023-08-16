@@ -56,16 +56,16 @@ pipeline {
                 script {
                     def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
                     def prodContainerName = 'myapp'
-                    def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+                    def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
 
                     docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
                         def image = docker.image(imageName)
                         image.push()
 
-                        // Tag the image for deployment to Prod
-                        def prodTag = "${appVersion}-latest"
-                        image.tag("${prodImageName}", prodTag)
-                        image.push("${prodImageName}:${prodTag}")
+                        // Tag and push the image for deployment to Prod repository
+                        def prodTag = "${prodImageName}"
+                        image.tag(prodTag, 'latest')
+                        image.push(prodTag)
                     }
 
                     // Deployment commands for Prod
