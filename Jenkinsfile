@@ -62,19 +62,22 @@ pipeline {
                         def image = docker.image(imageName)
                         image.push()
 
-                        // Tag and push the image for deployment to Prod
-                        def prodTag = "${prodImageName}"
-                        image.tag("${prodTag}", 'latest')
-                        image.push("${prodTag}")
+                        // Tag the image for deployment to Prod
+                        def prodTag = "devopsgroupe4/myapp_react-app:${appVersion}-latest"
+                        image.tag(prodTag)
+
+                        // Push the tagged image
+                        image.push()
                     }
 
-                    // Deployment commands for Prod 
-                    sh "docker stop ${prodContainerName}  true"
-                    sh "docker rm ${prodContainerName}  true"
+                    // Deployment commands for Prod
+                    sh "docker stop ${prodContainerName} || true"
+                    sh "docker rm ${prodContainerName} || true"
                     sh "docker run -d --name ${prodContainerName} -p 80:80 ${prodImageName}"
                 }
             }
         }
+
 
         
     }
