@@ -5,7 +5,8 @@ pipeline {
 
     environment {
         NVM_DIR = "/var/lib/jenkins/.nvm"
-        NODE_VERSION = "16.13.0"  // Use the required Node.js version
+        NVM_PATH = "$NVM_DIR/nvm.sh"
+        NODE_VERSION = "16.13.0"
     }
 
     stages {
@@ -17,8 +18,8 @@ pipeline {
                     sh ". $NVM_DIR/nvm.sh"  // Use the dot command instead of source
 
                     // Install the required Node.js version
-                    sh "nvm install $NODE_VERSION"
-                    sh "nvm use $NODE_VERSION"
+                    sh ". $NVM_PATH"  // Load nvm script
+                    sh "bash -c 'source $NVM_PATH && nvm install $NODE_VERSION'"
                 }
             }
         }
