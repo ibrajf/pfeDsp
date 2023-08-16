@@ -11,23 +11,40 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                // Install dependencies (assuming npm/yarn for a React app)
-                sh 'npm install' 
+            parallel {
+                stage('Install Dependencies') {
+                    steps {
+                        // Use npm ci for faster, consistent installations
+                        sh 'npm ci'
+                    }
+                }
 
-                // Run unit tests
-                sh 'npm test'    
+                stage('Run Unit Tests') {
+                    steps {
+                        sh 'npm test'
+                    }
+                }
 
-                // Run integration tests (if applicable)
-                sh 'npm run integration-test' // or 'yarn run integration-test'
+                stage('Run Integration Tests') {
+                    steps {
+                        sh 'npm run integration-test'
+                    }
+                }
 
-                // Run end-to-end tests (if applicable)
-                sh 'npm run e2e-test' 
+                stage('Run End-to-End Tests') {
+                    steps {
+                        sh 'npm run e2e-test'
+                    }
+                }
 
-                // Perform other test-related tasks (linting, etc.)
-                sh 'npm run lint'  
+                stage('Linting') {
+                    steps {
+                        sh 'npm run lint'
+                    }
+                }
             }
         }
+
 
 
         stage('Build Docker Image') {
