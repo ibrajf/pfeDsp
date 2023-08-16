@@ -16,7 +16,7 @@ pipeline {
                 sh 'npm config set cache /path/to/cache/directory'
 
                 // Install dependencies
-                sh 'sudo npm install'
+                sh 'npm install --cache'
                 
                 // Run unit tests
                 sh 'npm test'
