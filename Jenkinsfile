@@ -13,8 +13,8 @@ pipeline {
             steps {
                 script {
                     // Install NVM
-                    sh "curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash"
-                    sh "source $NVM_DIR/nvm.sh"
+                    sh "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash"
+                    sh ". $NVM_DIR/nvm.sh"  // Use the dot command instead of source
 
                     // Install the required Node.js version
                     sh "nvm install $NODE_VERSION"
@@ -22,6 +22,18 @@ pipeline {
                 }
             }
         }
+
+        // Rest of your stages...
+
+    }
+}
+By using the dot command (.), you're effectively sourcing the nvm.sh script within the current shell environment. This should resolve the issue you encountered with the source command not being found in the Jenkins environment.
+
+
+
+
+
+
 
         stage('Checkout') {
             steps {
