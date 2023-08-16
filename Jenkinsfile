@@ -10,10 +10,13 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+       stage('Run Tests') {
             steps {
+                // Set npm cache directory
+                sh 'npm config set cache /path/to/cache/directory'
+
                 // Install dependencies
-                sh 'npm ci'
+                sh 'npm install'
                 
                 // Run unit tests
                 sh 'npm test'
@@ -28,6 +31,7 @@ pipeline {
                 sh 'npm run lint'
             }
         }
+
 
 
 
