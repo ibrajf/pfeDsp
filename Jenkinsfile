@@ -23,18 +23,6 @@ pipeline {
             }
         }
 
-        // Rest of your stages...
-
-    }
-}
-By using the dot command (.), you're effectively sourcing the nvm.sh script within the current shell environment. This should resolve the issue you encountered with the source command not being found in the Jenkins environment.
-
-
-
-
-
-
-
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
