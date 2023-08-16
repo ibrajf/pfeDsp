@@ -12,9 +12,6 @@ pipeline {
 
        stage('Run Tests') {
             steps {
-                // Set npm cache directory
-                sh 'npm config set cache /path/to/cache/directory'
-
                 // Install dependencies
                 sh 'npm install'
                 
