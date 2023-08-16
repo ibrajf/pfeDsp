@@ -12,7 +12,8 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                
+                // Install dependencies (assuming npm/yarn for a React app)
+                sh 'npm install' 
 
                 // Run unit tests
                 sh 'npm test'    
