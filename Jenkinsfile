@@ -64,10 +64,8 @@ pipeline {
 
                         // Tag the image for deployment to Prod
                         def prodTag = "${appVersion}-latest"
-                        image.tag("devopsgroupe4/myapp_react-app:${prodTag}")
-
-                        // Push the tagged image
-                        image.push("devopsgroupe4/myapp_react-app:${prodTag}")
+                        image.tag("${prodImageName}", prodTag)
+                        image.push("${prodImageName}:${prodTag}")
                     }
 
                     // Deployment commands for Prod
@@ -77,6 +75,7 @@ pipeline {
                 }
             }
         }
+
         
     }
 }
