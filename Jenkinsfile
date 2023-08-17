@@ -18,6 +18,7 @@ pipeline {
                 sh 'rm -rf node_modules'
 
                 // Install dependencies
+                sh 'npm ci'
                 
                 // Run unit tests
                 sh 'npm test'
