@@ -2,11 +2,19 @@ def appVersion = '1.0.0'
 
 pipeline {
     agent any
+    tools {
+        nodejs 'Node' // Use the name of the Node.js installation you configured
+    }
 
     stages {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
+            }
+        }
+        stage('Check node version') {
+            steps {
+                sh 'node -v'
             }
         }
 
