@@ -13,11 +13,9 @@ pipeline {
         
         stage('change node v') {
             steps {
-                // Install nvm
-                sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash'
+                // Load nvm script using sourcing
+                sh 'source /var/lib/jenkins/.nvm/nvm.sh'
 
-                // Load nvm into the shell session
-                sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] &&  "$NVM_DIR/nvm.sh"'
                 // Install Node.js 16
                 sh 'nvm install 16'
                 sh 'nvm --version'
