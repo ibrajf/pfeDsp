@@ -13,7 +13,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Install dependencies
-                sh 'npm install'
+                sh 'npm install --unsafe-perm=true --allow-root'
                 
                 // Run unit tests
                 sh 'npm test'
