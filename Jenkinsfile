@@ -12,7 +12,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'node -v'
+                sh 'nvm -v'
                 // Install dependencies
                 sh 'npm install'
                 
