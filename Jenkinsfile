@@ -13,8 +13,6 @@ pipeline {
         
         stage('change node v') {
             steps {
-                // Load nvm script using sourcing
-                sh 'source /var/lib/jenkins/.nvm/nvm.sh'
 
                 // Install Node.js 16
                 sh 'nvm install 16'
