@@ -12,11 +12,6 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
             }
         }
-        stage('Check node version') {
-            steps {
-                sh 'node -v'
-            }
-        }
 
         stage('Run Tests') {
             steps {
