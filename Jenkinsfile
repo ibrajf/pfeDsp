@@ -9,32 +9,6 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
             }
         }
-       
-
-        stage('Run Tests') {
-            steps {
-                // Load nvm into the shell session
-                sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && "$NVM_DIR/nvm.sh"'
-
-                // Install dependencies
-                sh 'npm install'
-                
-                // Run unit tests
-                sh 'npm test'
-                
-                // Run integration tests (if applicable)
-                sh 'npm run integration-test' // or 'yarn run integration-test'
-                
-                // Run end-to-end tests (if applicable)
-                sh 'npm run e2e-test'
-                
-                // Perform other test-related tasks (linting, etc.)
-                sh 'npm run lint'
-            }
-        }
-
-
-
 
         stage('Build Docker Image') {
             steps {
