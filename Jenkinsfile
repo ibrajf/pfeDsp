@@ -12,6 +12,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
+                sh 'node -v'
                 // Install dependencies
                 sh 'npm install'
                 
