@@ -9,24 +9,14 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
             }
         }
-        stage('Setup') {
-            steps {
-                // Clean up existing node_modules and package-lock.json
-                sh 'rm -rf node_modules'
-                sh 'rm package-lock.json'
-                
-                // Install or switch to the desired Node.js version (assuming you use tools like nvm)
-                sh 'nvm install 16' // Example command, adjust as needed
-                
-                // Update npm to a compatible version
-                sh 'npm install -g npm@latest'
-            }
-        }
+       
         
-        stage('Install Dependencies') {
+        stage('change node v') {
             steps {
                 // Run npm install with verbose logging
-                sh 'npm install --loglevel=verbose'
+                sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh'
+                sh 'nvm install 16'
+                sh 'nvm --version'
             }
         }
 
