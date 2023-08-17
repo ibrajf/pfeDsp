@@ -27,7 +27,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Load nvm into the shell session
-                sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+                sh 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && "$NVM_DIR/nvm.sh"'
 
                 sh 'nvm -v'
                 // Install dependencies
