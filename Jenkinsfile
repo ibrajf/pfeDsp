@@ -10,15 +10,6 @@ pipeline {
             }
         }
        
-        
-        stage('change node v') {
-            steps {
-
-                // Install Node.js 16
-                sh 'nvm install 16'
-                sh 'nvm --version'
-            }
-        }
 
         stage('Run Tests') {
             steps {
