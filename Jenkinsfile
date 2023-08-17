@@ -14,9 +14,6 @@ pipeline {
         stage('change node v') {
             steps {
                 // Run npm install with verbose logging
-                sh 'export NVM_DIR="$HOME/.nvm'
-
-                sh '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
                 sh 'nvm install 16'
                 sh 'nvm --version'
             }
