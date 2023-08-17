@@ -16,7 +16,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Install dependencies
-                sh 'npm install'
+                sh 'npm install --unsafe-perm'
                 
                 // Run unit tests
                 sh 'npm test'
