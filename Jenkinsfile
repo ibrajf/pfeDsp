@@ -81,7 +81,7 @@ pipeline {
         //     }
         // }
 
-        // test automatic pull
+        // test automatic pull 
         stage('Automated Pull to Server') {
             when {
                 expression {
