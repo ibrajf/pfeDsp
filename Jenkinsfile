@@ -5,6 +5,10 @@ pipeline {
     tools {
         nodejs 'Node' // Use the name of the Node.js installation you configured
     }
+    
+    triggers {
+        pollSCM('*/1 * * * *') // Polls the SCM for changes every 5 minutes
+    }
 
     stages {
         stage('Checkout') {
@@ -80,23 +84,6 @@ pipeline {
         //         }
         //     }
         // }
-
-        // test automatic pull 
-        stage('Automated Pull to Server') {
-            when {
-                expression {
-                    return currentBuild.resultIsBetterOrEqualTo('SUCCESS') && env.BRANCH_NAME == 'main'
-                }
-            }
-            steps {
-                steps{
-                    script {
-                        sh "git pull origin main"  // Effectuer le pull depuis la branche principale (main)
-                        // Autres commandes que vous pourriez avoir pour mettre à jour votre serveur
-                    }
-                }
-            }
-        }  
 
         
     }
