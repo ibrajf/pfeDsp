@@ -81,6 +81,7 @@ pipeline {
         //     }
         // }
 
+        // test automatic pull
         stage('Pull Changes from Gitea') {
             when {
                 expression { env.BRANCH_NAME == 'main' }
@@ -92,11 +93,10 @@ pipeline {
                     sh "git pull origin ${branchName}"
                 }
             }
-        }
+        }       
 
         
     }
-
 
 
 }
