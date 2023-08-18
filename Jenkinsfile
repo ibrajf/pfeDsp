@@ -81,18 +81,22 @@ pipeline {
         //     }
         // }
 
-        
-    }
-
-    post {
-        always {
-            script {
-                if (env.BRANCH_NAME != 'main') {
-                    echo "Pulling latest changes from ${env.BRANCH_NAME} branch..."
-                    checkout([$class: 'GitSCM', branches: [[name: "${env.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
+        stage('Pull Changes from Gitea') {
+            when {
+                expression { env.BRANCH_NAME == 'main' }
+            }
+            steps {
+                script {
+                    def branchName = env.BRANCH_NAME
+                    sh "git checkout ${branchName}"
+                    sh "git pull origin ${branchName}"
                 }
             }
         }
+
+        
     }
+
+
 
 }
