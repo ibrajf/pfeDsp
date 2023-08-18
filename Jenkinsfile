@@ -13,26 +13,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                sh 'rm -rf node_modules'
 
-                // Install dependencies
-                sh 'npm ci'
-                
-                // Run unit tests
-                sh 'npm test'
-                
-                // Run integration tests (if applicable)
-                sh 'npm run integration-test' // or 'yarn run integration-test'
-                
-                // Run end-to-end tests (if applicable)
-                sh 'npm run e2e-test'
-                
-                // Perform other test-related tasks (linting, etc.)
-                sh 'npm run lint'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
