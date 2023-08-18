@@ -56,31 +56,43 @@ pipeline {
             }
         }
 
-        stage('Deploy to Prod') {
-            steps {
-                script {
-                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-                    def prodContainerName = 'myapp'
-                    def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+        // stage('Deploy to Prod') {
+        //     steps {
+        //         script {
+        //             def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+        //             def prodContainerName = 'myapp'
+        //             def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
 
-                    docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                        def image = docker.image(imageName)
-                        image.push()
+        //             docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+        //                 def image = docker.image(imageName)
+        //                 image.push()
 
-                        // Tag and push the image for deployment to Prod repository
-                        def prodTag = "${prodImageName}"
-                        image.tag(prodTag, 'latest')
-                        image.push(prodTag)
-                    }
+        //                 // Tag and push the image for deployment to Prod repository
+        //                 def prodTag = "${prodImageName}"
+        //                 image.tag(prodTag, 'latest')
+        //                 image.push(prodTag)
+        //             }
 
-                    // Deployment commands for Prod
-                    sh "docker stop ${prodContainerName} || true"
-                    sh "docker rm ${prodContainerName} || true"
-                    sh "docker run -d --name ${prodContainerName} -p 80:80 ${prodImageName}"
-                }
-            }
-        }
+        //             // Deployment commands for Prod
+        //             sh "docker stop ${prodContainerName} || true"
+        //             sh "docker rm ${prodContainerName} || true"
+        //             sh "docker run -d --name ${prodContainerName} -p 80:80 ${prodImageName}"
+        //         }
+        //     }
+        // }
 
         
     }
+
+    post {
+        always {
+            script {
+                if (env.BRANCH_NAME != 'main') {
+                    echo "Pulling latest changes from ${env.BRANCH_NAME} branch..."
+                    checkout([$class: 'GitSCM', branches: [[name: "${env.BRANCH_NAME}"]], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
+                }
+            }
+        }
+    }
+
 }
