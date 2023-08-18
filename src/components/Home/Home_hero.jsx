@@ -30,7 +30,7 @@ export default function WithBackgroundImage() {
             lineHeight={1.2}
             align={'center'}
             fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-            Jouez pour découvrir des arômes inattendus et des récompenses gourmandes!
+            Jouez pour découvrir des arômes inattendus et des récompenses gourmandes! tester l'automatisation du pull
           </Text>
           <Stack direction={'row'}>
             <Link href='/checkcode'>
