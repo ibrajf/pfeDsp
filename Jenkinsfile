@@ -82,18 +82,19 @@ pipeline {
         // }
 
         // test automatic pull
-        stage('Pull Changes from Gitea') {
+        stage('Automated Pull to Server') {
             when {
-                expression { env.BRANCH_NAME == 'main' }
+                expression {
+                    return currentBuild.resultIsBetterOrEqualTo('SUCCESS') && env.BRANCH_NAME == 'main'
+                }
             }
             steps {
                 script {
-                    def branchName = env.BRANCH_NAME
-                    sh "git checkout ${branchName}"
-                    sh "git pull origin ${branchName}"
+                    sh "git pull origin main"  // Effectuer le pull depuis la branche principale (main)
+                    // Autres commandes que vous pourriez avoir pour mettre à jour votre serveur
                 }
             }
-        }       
+        }  
 
         
     }
