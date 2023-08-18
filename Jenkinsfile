@@ -89,9 +89,11 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    sh "git pull origin main"  // Effectuer le pull depuis la branche principale (main)
-                    // Autres commandes que vous pourriez avoir pour mettre à jour votre serveur
+                steps{
+                    script {
+                        sh "git pull origin main"  // Effectuer le pull depuis la branche principale (main)
+                        // Autres commandes que vous pourriez avoir pour mettre à jour votre serveur
+                    }
                 }
             }
         }  
