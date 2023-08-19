@@ -5,10 +5,6 @@ pipeline {
     tools {
         nodejs 'Node' // Use the name of the Node.js installation you configured
     }
-    
-    triggers {
-        pollSCM('*/1 * * * *') // Polls the SCM for changes every 5 minutes
-    }
 
     stages {
         stage('Checkout') {
@@ -84,6 +80,20 @@ pipeline {
         //         }
         //     }
         // }
+
+        // test automatic pull
+        stage('Pull Changes from Gitea') {
+            when {
+                expression { env.BRANCH_NAME == 'main' }
+            }
+            steps {
+                script {
+                    def branchName = env.BRANCH_NAME
+                    sh "git checkout ${branchName}"
+                    sh "git pull origin ${branchName}"
+                }
+            }
+        }       
 
         
     }
