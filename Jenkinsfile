@@ -94,7 +94,6 @@ pipeline {
                     // Change the working directory to the project directory
                     dir(projectDirectory) {
                         // Inside this block, you are in the project directory
-                        sh "git checkout ${branchName}"
                         sh "git pull origin ${branchName}"
                     }
                 }
