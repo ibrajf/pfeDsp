@@ -5,10 +5,17 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import AddCodeModal from "../AddCode"
 import Auth from "../../context/Auth"
 import { useContext } from "react"
+import { useNavigate } from "react-router"
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isAuthenticated } = useContext(Auth)
+  const navigate = useNavigate()
+
+  const signOut = () => {
+    localStorage.removeItem("token")
+    navigate("/")
+  }
 
   return (
     <>
@@ -16,10 +23,12 @@ export default function Nav() {
         <Flex h={99} alignItems={"center"} justifyContent={"space-between"}>
           <Box alt="Composer un code">
             <Stack direction="row">
-              {isAuthenticated && (
+              {localStorage.getItem("token") ? (
                 <>
                   <AddCodeModal />
                 </>
+              ) : (
+                ""
               )}
             </Stack>
           </Box>
@@ -33,7 +42,7 @@ export default function Nav() {
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
               <Button onClick={toggleColorMode}>{colorMode === "light" ? <MoonIcon /> : <SunIcon />}</Button>
-              {isAuthenticated && (
+              {localStorage.getItem("token") ? (
                 <>
                   <Menu>
                     <MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
@@ -53,10 +62,15 @@ export default function Nav() {
                       <Link href="/Configuration">
                         <MenuItem icon={<FiSettings />}>Configuration </MenuItem>
                       </Link>
-                      <MenuItem icon={<FiLogOut />}>Se déconnecter</MenuItem>
+
+                      <MenuItem icon={<FiLogOut />} onClick={() => signOut()}>
+                        Se déconnecter
+                      </MenuItem>
                     </MenuList>
                   </Menu>
                 </>
+              ) : (
+                ""
               )}
             </Stack>
           </Flex>

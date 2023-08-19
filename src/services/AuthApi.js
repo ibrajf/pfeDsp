@@ -1,3 +1,3 @@
-export function hasAuthenticated() {
-  return true
-}
+// export function hasAuthenticated() {
+//   return !!localStorage.getItem("token")
+// }

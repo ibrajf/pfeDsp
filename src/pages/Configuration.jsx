@@ -19,7 +19,7 @@ export default function UserProfileEdit() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/1")
+        const response = await axios.get("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/10")
         setUserData(response.data)
       } catch (error) {
         console.error("Error fetching data:", error)
@@ -42,7 +42,7 @@ export default function UserProfileEdit() {
 
   const handleSubmit = async () => {
     try {
-      await axios.put("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/1", userData)
+      await axios.put("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/10", userData)
       console.log("Data updated successfully")
     } catch (error) {
       console.error("Error updating data:", error.response.data) // Log full error response

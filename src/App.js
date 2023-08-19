@@ -17,31 +17,36 @@ import PageError from "./pages/PageError"
 import CookieConsent from "./components/CookieConsent"
 import Auth from "./context/Auth"
 import { hasAuthenticated } from "./services/AuthApi"
+import SignIn from "./pages/SignIn"
+import SignUp from "./pages/SignUp"
 
 function App() {
   const [isAuthenticated, setisAuthenticated] = useState(hasAuthenticated)
   return (
-    <Auth.Provider value={{ isAuthenticated }}>
-      <ChakraProvider theme={theme}>
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/home" element={<NotreHistoire />} />
-              <Route path="/faq" element={<Faq />} />
-              <Route path="/contact" element={<ContactUs />} />
-              <Route path="/Checkcode" element={<Checkcode />} />
-              <Route path="/blog/detail/:id" element={isAuthenticated ? <Blogdetails /> : <Navigate to="/CheckCode" />} />
-              <Route path="/historique" element={isAuthenticated ? <Historique /> : <Navigate to="/CheckCode" />} />
-              <Route path="/Configuration" element={isAuthenticated ? <Configuration /> : <Navigate to="/CheckCode" />} />
-              <Route path="*" element={<PageError />} />
-            </Routes>
-            <CookieConsent />
-          </Layout>
-        </Router>
-      </ChakraProvider>
-    </Auth.Provider>
+    // <Auth.Provider value={{ isAuthenticated }}>
+    <ChakraProvider theme={theme}>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/home" element={<NotreHistoire />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/Checkcode" element={<Checkcode />} />
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+
+            <Route path="/blog/detail/:id" element={<Blogdetails />} />
+            <Route path="/historique" element={localStorage.getItem("token") ? <Historique /> : <SignIn />} />
+            <Route path="/Configuration" element={localStorage.getItem("token") ? <Configuration /> : <SignIn />} />
+            <Route path="*" element={<PageError />} />
+          </Routes>
+          <CookieConsent />
+        </Layout>
+      </Router>
+    </ChakraProvider>
+    // </Auth.Provider>
   )
 }
 
