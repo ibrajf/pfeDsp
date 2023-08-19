@@ -20,6 +20,13 @@ pipeline {
             }
         }
 
+        // Add a new stage for pulling changes from Gitea
+        stage('Pull Changes from Gitea') {
+            steps {
+                sh "cd /home/myApp/frontend && git pull origin main"
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -31,6 +38,7 @@ pipeline {
                 }
             }
         }
+
         
 
         stage('Deploy to Preprod') {
