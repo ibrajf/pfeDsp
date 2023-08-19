@@ -3,7 +3,7 @@ def appVersion = '1.0.0'
 pipeline {
     agent any
     tools {
-        nodejs 'Node' // Use the name of the Node.js installation you configured
+        nodejs 'Node' // Use the name of the Node.js installation you configured 
     }
 
     stages {
