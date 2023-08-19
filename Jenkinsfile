@@ -91,15 +91,24 @@ pipeline {
                     def branchName = env.BRANCH_NAME
                     def projectDirectory = '/home/myApp/frontend'
 
+                    echo "Current directory: ${pwd()}"
+                    echo "Listing contents of the directory:"
+                    sh "ls -la"
+
                     // Change the working directory to the project directory
                     dir(projectDirectory) {
                         // Inside this block, you are in the project directory
-                        sh "cd ${projectDirectory}"
+                        echo "Current directory (inside dir): ${pwd()}"
+                        echo "Git status before pull:"
+                        sh "git status"
                         sh "git pull origin ${branchName}"
+                        echo "Git status after pull:"
+                        sh "git status"
                     }
                 }
             }
         }
+
 
 
    
