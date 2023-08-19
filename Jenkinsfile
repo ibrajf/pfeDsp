@@ -91,6 +91,7 @@ pipeline {
                 script {
                     def branchName = env.BRANCH_NAME
                     checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git', credentialsId: 'gitea Groupe4']]])
+                    sh "git pull origin main"
                 }
             }
         }     
