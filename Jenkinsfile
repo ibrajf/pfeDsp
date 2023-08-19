@@ -89,13 +89,14 @@ pipeline {
             steps {
                 script {
                     def branchName = env.BRANCH_NAME
-                    echo "Current directory: ${pwd()}"
-                    sh "ls -la" // List files in the workspace
-                    sh "git --version" // Check Git version
-                    sh "git config --list" // List Git configuration
-                    sh "git remote -v" // Check Git remotes
-                    sh "git checkout ${branchName}"
-                    sh "git pull origin ${branchName}"
+                    def projectDirectory = '/home/myApp/frontend'
+
+                    // Change the working directory to the project directory
+                    dir(projectDirectory) {
+                        // Inside this block, you are in the project directory
+                        sh "git checkout ${branchName}"
+                        sh "git pull origin ${branchName}"
+                    }
                 }
             }
         }
