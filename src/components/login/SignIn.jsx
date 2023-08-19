@@ -8,7 +8,7 @@ function SignIn() {
   const navigate = useNavigate()
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
 
   const handleSubmit = e => {
     e.preventDefault()
