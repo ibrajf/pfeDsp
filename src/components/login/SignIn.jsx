@@ -3,22 +3,28 @@ import { FcGoogle } from "react-icons/fc"
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useUser } from "../../context/UserContext"
 
 function SignIn() {
   const navigate = useNavigate()
-  const { setUser } = useUser() // Utilisation du contexte utilisateur
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
+  const [user, setUser] = useState(null)
 
   const handleSubmit = e => {
     e.preventDefault()
 
     axios
-      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users", credentials)
+      .post("http://api.dsp-archiwebo21a-hm-ah.fr/api/auth", credentials, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
       .then(response => {
-        setUser(response.data) // Mettre à jour le contexte utilisateur avec les données de l'utilisateur
-        navigate("/Configuration") // Rediriger vers la page de configuration
+        // setUser(response.data) // Mettre à jour le contexte utilisateur avec les données de l'utilisateur
+        console.log(response.data)
+        localStorage.setItem("token", response.data.token)
+
+        navigate("/configuration") // Rediriger vers la page de configuration
       })
       .catch(error => {
         console.log(error.response.data)
