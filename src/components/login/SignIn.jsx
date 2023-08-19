@@ -27,30 +27,30 @@ function SignIn() {
   }
 
   return (
-    <Box maxWidth="400px" mx="auto" mt="20px">
-      <Heading marginBottom="20px">Sign In</Heading>
+    <Box maxWidth="350px" mx="auto" mt="20px">
+      <Heading marginBottom="20px">Connexion</Heading>
       <form onSubmit={handleSubmit}>
         <Stack spacing="20px">
           <FormControl>
             <FormLabel>Email</FormLabel>
-            <Input type="email" placeholder="Enter your email" onChange={e => setCredentials({ ...credentials, email: e.target.value })} />
+            <Input type="email" placeholder="Email" onChange={e => setCredentials({ ...credentials, email: e.target.value })} />
           </FormControl>
           <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input type="password" placeholder="Enter your password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
+            <FormLabel>Mot de passe</FormLabel>
+            <Input type="password" placeholder="Mot de passe" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
           </FormControl>
           {error && <Text color="red.500">{error}</Text>} {/* Afficher l'erreur si elle existe */}
           <Button type="submit" colorScheme="teal">
-            Sign In
+            Se connecter
           </Button>
           <Button leftIcon={<FcGoogle />} variant="outline" colorScheme="teal">
-            Sign In with Gmail
+            Se connecter avec Gmail
           </Button>
         </Stack>
       </form>
-      <Link href="/signup" color="teal.500" mt="20px">
+      {/* <Link href="/signup" color="teal.500" mt="20px">
         Don't have an account? Sign Up
-      </Link>
+      </Link> */}
     </Box>
   )
 }
