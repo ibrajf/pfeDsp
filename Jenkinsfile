@@ -87,14 +87,19 @@ pipeline {
                 expression { env.BRANCH_NAME == 'main' }
             }
             steps {
-                cleanWs()
                 script {
                     def branchName = env.BRANCH_NAME
-                    checkout([$class: 'GitSCM', branches: [[name: "${branchName}"]], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git', credentialsId: 'gitea Groupe4']]])
-                    sh "git pull origin main"
+                    echo "Current directory: ${pwd()}"
+                    sh "ls -la" // List files in the workspace
+                    sh "git --version" // Check Git version
+                    sh "git config --list" // List Git configuration
+                    sh "git remote -v" // Check Git remotes
+                    sh "git checkout ${branchName}"
+                    sh "git pull origin ${branchName}"
                 }
             }
-        }     
+        }
+   
 
         
     }
