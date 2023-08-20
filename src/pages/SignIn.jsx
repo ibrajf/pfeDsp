@@ -3,12 +3,14 @@ import { FcGoogle } from "react-icons/fc"
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useToast } from "@chakra-ui/react"
 
 function SignIn() {
   const navigate = useNavigate()
   const [credentials, setCredentials] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
   // const [user, setUser] = useState(null)
+  const toast = useToast()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -23,6 +25,16 @@ function SignIn() {
         // setUser(response.data) // Mettre à jour le contexte utilisateur avec les données de l'utilisateur
         localStorage.setItem("user", JSON.stringify(response.data.user))
         localStorage.setItem("token", response.data.token)
+
+        toast({
+          title: "Connecté",
+          description: "Bonjour, vous êtes connecté à thétiptop",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right"
+        })
+
         navigate("/historique")
         window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })

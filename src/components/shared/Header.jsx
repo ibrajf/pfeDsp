@@ -6,14 +6,26 @@ import AddCodeModal from "../AddCode"
 // import Auth from "../../context/Auth"
 import { useContext } from "react"
 import { useNavigate } from "react-router"
+import { useToast } from "@chakra-ui/react"
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode()
   // const { isAuthenticated } = useContext(Auth)
   const navigate = useNavigate()
+  const toast = useToast()
 
   const signOut = () => {
     localStorage.removeItem("token")
+
+    toast({
+      title: "Goodbye!",
+      description: "See you again.",
+      status: "warning",
+      duration: 5000,
+      isClosable: true,
+      position: "top-right"
+    })
+
     navigate("/")
   }
 
