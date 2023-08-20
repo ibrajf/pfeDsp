@@ -13,14 +13,13 @@ export default function UserProfileEdit() {
   })
 
   useEffect(() => {
-    if (user) {
-      setProfile({
-        userName: user.userName,
-        firstName: user.firstName,
-        adress: user.adress,
-        email: user.email
-        // Ajouter d'autres champs si nécessaire
-      })
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/10")
+        setUserData(response.data)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
     }
   }, [user])
 
@@ -32,6 +31,18 @@ export default function UserProfileEdit() {
     }))
   }
 
+  const handleCancel = () => {
+    navigate("/historique")
+  }
+
+  const handleSubmit = async () => {
+    try {
+      await axios.put("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/10", userData)
+      console.log("Data updated successfully")
+    } catch (error) {
+      console.error("Error updating data:", error.response.data) // Log full error response
+    }
+  }
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
       {/* Reste du code */}
