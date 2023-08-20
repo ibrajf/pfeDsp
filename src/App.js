@@ -1,9 +1,9 @@
-import { React, useState } from "react"
+import { React } from "react"
 import { ChakraProvider } from "@chakra-ui/react"
 import Layout from "./components/layout/Layout"
 import theme from "./theme"
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Blog from "./pages/blog/Blog"
 import Faq from "./pages/Faq"
@@ -15,13 +15,13 @@ import Configuration from "./pages/Configuration"
 import NotreHistoire from "./components/NotreHistoire"
 import PageError from "./pages/PageError"
 import CookieConsent from "./components/CookieConsent"
-import Auth from "./context/Auth"
-import { hasAuthenticated } from "./services/AuthApi"
+// import Auth from "./context/Auth"
+// import { hasAuthenticated } from "./services/AuthApi"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 
 function App() {
-  const [isAuthenticated, setisAuthenticated] = useState(hasAuthenticated)
+  // const [isAuthenticated, setisAuthenticated] = useState(hasAuthenticated)
   return (
     // <Auth.Provider value={{ isAuthenticated }}>
     <ChakraProvider theme={theme}>

@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react"
+import bcrypt from "bcryptjs"
 
 function SignUp() {
   const [formValues, setFormValues] = useState({
@@ -10,14 +11,24 @@ function SignUp() {
     lastName: ""
   })
 
+  const hashPassword = password => {
+    const salt = bcrypt.genSaltSync(10)
+    return bcrypt.hashSync(password, salt)
+  }
+
   const handleSubmit = e => {
     e.preventDefault()
 
+    // Hash the password with bcrypt
+    const hashedPassword = hashPassword(formValues.password)
+
+    // Replace the plain password with the hashed one
+    const dataToSend = { ...formValues, password: hashedPassword }
+
     axios
-      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users", formValues)
+      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users", dataToSend)
       .then(response => {
         console.log("User created successfully:", response.data)
-        //  logique a faire apres la subbmision du formulaire
       })
       .catch(error => {
         console.error("An error occurred while creating the user:", error)

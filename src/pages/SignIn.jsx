@@ -14,7 +14,7 @@ function SignIn() {
     e.preventDefault()
 
     axios
-      .post("http://api.dsp-archiwebo21a-hm-ah.fr/api/auth", credentials, {
+      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/login", credentials, {
         headers: {
           "Content-Type": "application/json"
         }
