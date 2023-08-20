@@ -42,9 +42,10 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh "cd /home/myApp/frontend" // Change to your app's directory
-                sh "npm install" // Install project dependencies (if not done already)
-                sh "npm test" // Run tests
+                dir('/home/myApp/frontend') {
+                    sh "npm install"
+                    sh "npm test"
+                }
             }
         }
 
