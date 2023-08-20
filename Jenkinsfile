@@ -22,7 +22,6 @@ pipeline {
         // Add a new stage for pulling changes from Gitea
         stage('Pull Changes from Gitea') {
             steps {
-                sh "chown -R jenkins:jenkins /home/myApp"
                 sh "git config --global --add safe.directory /home/myApp/frontend"
                 sh "cd /home/myApp/frontend && git pull origin main"
             }
