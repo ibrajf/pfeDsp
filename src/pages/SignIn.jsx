@@ -23,7 +23,8 @@ function SignIn() {
         // setUser(response.data) // Mettre à jour le contexte utilisateur avec les données de l'utilisateur
         localStorage.setItem("user", JSON.stringify(response.data.user))
         localStorage.setItem("token", response.data.token)
-        navigate("/configuration") // Rediriger vers la page de configuration
+        navigate("/historique")
+        window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })
       .catch(error => {
         console.log(error.response.data)
