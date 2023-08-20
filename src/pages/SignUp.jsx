@@ -58,7 +58,8 @@ function SignUp() {
           description: "There was an issue creating your account. Please try again.",
           status: "error",
           duration: 5000,
-          isClosable: true
+          isClosable: true,
+          position: "top-right"
         })
       })
   }
