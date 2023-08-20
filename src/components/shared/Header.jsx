@@ -3,13 +3,13 @@ import { FiLogOut, FiSettings } from "react-icons/fi"
 import { Box, Flex, Avatar, Menu, Button, MenuButton, MenuList, MenuItem, MenuDivider, useColorModeValue, Stack, useColorMode, Center, Image, Link } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import AddCodeModal from "../AddCode"
-import Auth from "../../context/Auth"
+// import Auth from "../../context/Auth"
 import { useContext } from "react"
 import { useNavigate } from "react-router"
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode()
-  const { isAuthenticated } = useContext(Auth)
+  // const { isAuthenticated } = useContext(Auth)
   const navigate = useNavigate()
 
   const signOut = () => {
