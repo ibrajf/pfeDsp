@@ -57,7 +57,7 @@ const CheckCodeForm = () => {
       </Flex> */}
 
       <Box textAlign="center" m={5}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque delectus autem at eius veniam consequuntur facere animi.
+        Saisissez l'opportunité de gagner des trésors théinés!
       </Box>
 
       {!showAuth ? renderCodeForm() : renderAuthForm()}
