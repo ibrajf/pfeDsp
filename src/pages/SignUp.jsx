@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react"
+import { Box, Button, FormControl, FormLabel, Input, Heading, useColorModeValue } from "@chakra-ui/react"
 import bcrypt from "bcryptjs"
 
 function SignUp() {
@@ -36,25 +36,28 @@ function SignUp() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormControl>
-        <FormLabel>First Name</FormLabel>
-        <Input type="text" placeholder="Enter your first name" onChange={e => setFormValues({ ...formValues, firstName: e.target.value })} />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Last Name</FormLabel>
-        <Input type="text" placeholder="Enter your last name" onChange={e => setFormValues({ ...formValues, lastName: e.target.value })} />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Email</FormLabel>
-        <Input type="email" placeholder="Enter your email" onChange={e => setFormValues({ ...formValues, email: e.target.value })} />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Password</FormLabel>
-        <Input type="password" placeholder="Enter a strong password" onChange={e => setFormValues({ ...formValues, password: e.target.value })} />
-      </FormControl>
-      <Button type="submit">Sign Up</Button>
-    </form>
+    <Box spacing={4} mx={"auto"} maxW={"500px"} bg={useColorModeValue("#FFFAF0", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
+      <Heading marginBottom="20px" textAlign={"center"}>Inscription</Heading>
+      <form onSubmit={handleSubmit}>
+        <FormControl>
+          <FormLabel>Prénom</FormLabel>
+          <Input type="text" placeholder="Enter your first name" onChange={e => setFormValues({ ...formValues, firstName: e.target.value })} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Nom</FormLabel>
+          <Input type="text" placeholder="Enter your last name" onChange={e => setFormValues({ ...formValues, lastName: e.target.value })} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Email</FormLabel>
+          <Input type="email" placeholder="Enter your email" onChange={e => setFormValues({ ...formValues, email: e.target.value })} />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Mot de passe</FormLabel>
+          <Input type="password" placeholder="Enter a strong password" onChange={e => setFormValues({ ...formValues, password: e.target.value })} />
+        </FormControl>
+        <Button w={"100%"} mt={"20px"} bg="teal.500" type="submit">S'inscrire</Button>
+      </form>
+    </Box>
   )
 }
 

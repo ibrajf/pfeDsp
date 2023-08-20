@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel, Input, Stack, Heading, Link, Text } from "@chakra-ui/react"
+import { Box, Button, FormControl, FormLabel, Input, Stack, Heading, Link, Text, useColorModeValue } from "@chakra-ui/react"
 import { FcGoogle } from "react-icons/fc"
 import axios from "axios"
 import { useState } from "react"
@@ -33,8 +33,8 @@ function SignIn() {
   }
 
   return (
-    <Box maxWidth="400px" mx="auto" mt="20px">
-      <Heading marginBottom="20px">Sign In</Heading>
+    <Box spacing={4} mx={"auto"} maxW={"500px"} bg={useColorModeValue("#FFFAF0", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
+      <Heading marginBottom="20px" textAlign={"center"}>Connexion</Heading>
       <form onSubmit={handleSubmit}>
         <Stack spacing="20px">
           <FormControl>
@@ -42,20 +42,20 @@ function SignIn() {
             <Input type="email" placeholder="Enter your email" onChange={e => setCredentials({ ...credentials, email: e.target.value })} />
           </FormControl>
           <FormControl>
-            <FormLabel>Password</FormLabel>
+            <FormLabel>Mot de passe</FormLabel>
             <Input type="password" placeholder="Enter your password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
           </FormControl>
           {error && <Text color="red.500">{error}</Text>} {/* Afficher l'erreur si elle existe */}
           <Button type="submit" colorScheme="teal">
-            Sign In
+            Se connecter
           </Button>
           <Button leftIcon={<FcGoogle />} variant="outline" colorScheme="teal">
-            Sign In with Gmail
+            Se connecter avec Gmail
           </Button>
         </Stack>
       </form>
       <Link href="/signup" color="teal.500" mt="20px">
-        Don't have an account? Sign Up
+        Vous n'avez pas de compte? Inscrivez-vous !
       </Link>
     </Box>
   )
