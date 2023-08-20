@@ -34,9 +34,8 @@ function App() {
             <Route path="/faq" element={<Faq />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/Checkcode" element={<Checkcode />} />
-            <Route path="/login" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-
+            <Route path="/login" element={localStorage.getItem("token") ? <Home /> : <SignIn />} />
+            <Route path="/signup" element={localStorage.getItem("token") ? <Home /> : <SignUp />} />
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/historique" element={localStorage.getItem("token") ? <Historique /> : <SignIn />} />
             <Route path="/Configuration" element={localStorage.getItem("token") ? <Configuration /> : <SignIn />} />

@@ -21,9 +21,8 @@ function SignIn() {
       })
       .then(response => {
         // setUser(response.data) // Mettre à jour le contexte utilisateur avec les données de l'utilisateur
-        console.log(response.data)
+        localStorage.setItem("user", JSON.stringify(response.data.user))
         localStorage.setItem("token", response.data.token)
-
         navigate("/configuration") // Rediriger vers la page de configuration
       })
       .catch(error => {
@@ -34,7 +33,9 @@ function SignIn() {
 
   return (
     <Box spacing={4} mx={"auto"} maxW={"500px"} bg={useColorModeValue("#FFFAF0", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
-      <Heading marginBottom="20px" textAlign={"center"}>Connexion</Heading>
+      <Heading marginBottom="20px" textAlign={"center"}>
+        Connexion
+      </Heading>
       <form onSubmit={handleSubmit}>
         <Stack spacing="20px">
           <FormControl>
