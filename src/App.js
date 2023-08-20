@@ -22,6 +22,7 @@ import SignUp from "./pages/SignUp"
 
 function App() {
   // const [isAuthenticated, setisAuthenticated] = useState(hasAuthenticated)
+
   return (
     // <Auth.Provider value={{ isAuthenticated }}>
     <ChakraProvider theme={theme}>
@@ -38,7 +39,7 @@ function App() {
             <Route path="/signup" element={localStorage.getItem("token") ? <Home /> : <SignUp />} />
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/historique" element={localStorage.getItem("token") ? <Historique /> : <SignIn />} />
-            <Route path="/Configuration" element={localStorage.getItem("token") ? <Configuration /> : <SignIn />} />
+            <Route path="/configuration" element={localStorage.getItem("token") ? <Configuration /> : <SignIn />} />
             <Route path="*" element={<PageError />} />
           </Routes>
           <CookieConsent />
