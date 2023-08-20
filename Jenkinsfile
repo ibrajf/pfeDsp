@@ -39,7 +39,14 @@ pipeline {
             }
         }
 
-        
+        stage('Test') {
+            steps {
+                sh "cd /home/myApp/frontend" // Change to your app's directory
+                sh "npm install" // Install project dependencies (if not done already)
+                sh "npm test" // Run tests
+            }
+        }
+
 
         stage('Deploy to Preprod') {
             steps {
