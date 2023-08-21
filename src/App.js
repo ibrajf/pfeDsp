@@ -31,7 +31,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/home" element={<NotreHistoire />} />
+            {/* <Route path="/home" element={<NotreHistoire />} /> */}
             <Route path="/faq" element={<Faq />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/Checkcode" element={<Checkcode />} />
