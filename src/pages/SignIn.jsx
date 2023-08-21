@@ -35,7 +35,7 @@ function SignIn() {
           position: "top-right"
         })
 
-        navigate("/historique")
+        navigate("/checkcode")
         window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })
       .catch(error => {

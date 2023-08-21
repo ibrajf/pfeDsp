@@ -18,7 +18,7 @@ export default function WithBackgroundImage() {
             Jouez pour découvrir des arômes inattendus et des récompenses gourmandes! tester auto pull from Mohcine
           </Text>
           <Stack direction={"row"}>
-            <Link href="/checkcode">
+            <Link href="/login">
               <Button
                 bg={"whiteAlpha.300"}
                 rounded={"full"}
