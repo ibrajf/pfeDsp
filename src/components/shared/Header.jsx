@@ -1,5 +1,5 @@
 import logo from "../../images/logo.png"
-import { FiLogOut, FiSettings } from "react-icons/fi"
+import { FiLogOut, FiSettings, FiBookOpen } from "react-icons/fi"
 import { Box, Flex, Avatar, Menu, Button, MenuButton, MenuList, MenuItem, MenuDivider, useColorModeValue, Stack, useColorMode, Center, Image, Link } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import AddCodeModal from "../AddCode"
@@ -60,6 +60,11 @@ export default function Nav() {
                       </Center>
                       <br />
                       <MenuDivider />
+                      <Link href="/Historique">
+                        <MenuItem icon={<FiBookOpen />} aria-label="Historique">
+                          Historique
+                        </MenuItem>
+                      </Link>
                       <Link href="/Configuration">
                         <MenuItem icon={<FiSettings />} aria-label="Configuration">
                           Configuration
