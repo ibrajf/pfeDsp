@@ -12,14 +12,15 @@ import ContactUs from "./pages/ContactUs"
 import Blogdetails from "./pages/blog/details/Blogdetails"
 import Checkcode from "./pages/CheckCode"
 import Configuration from "./pages/Configuration"
-import NotreHistoire from "./components/NotreHistoire"
+// import NotreHistoire from "./components/NotreHistoire"
 import PageError from "./pages/PageError"
-import CookieConsent from "./components/CookieConsent"
+// import CookieConsent from "./components/CookieConsent"
 // import Auth from "./context/Auth"
 // import { hasAuthenticated } from "./services/AuthApi"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
-
+import ConditionsGenerales from "./pages/ConditionsGenerales"
+import MentionsLegales from "./pages/MentionsLegales"
 function App() {
   // const [isAuthenticated, setisAuthenticated] = useState(hasAuthenticated)
 
@@ -40,9 +41,11 @@ function App() {
             <Route path="/blog/detail/:id" element={<Blogdetails />} />
             <Route path="/historique" element={localStorage.getItem("token") ? <Historique /> : <SignIn />} />
             <Route path="/configuration" element={localStorage.getItem("token") ? <Configuration /> : <SignIn />} />
+            <Route path="/conditionsGenerales" element={<ConditionsGenerales />} />
+            <Route path="/mentionLegales" element={<MentionsLegales />} />
             <Route path="*" element={<PageError />} />
           </Routes>
-          <CookieConsent />
+          {/* <CookieConsent /> */}
         </Layout>
       </Router>
     </ChakraProvider>
