@@ -26,7 +26,7 @@ const CheckCodeForm = () => {
     }
   }
 
-  const renderAuthForm = () => navigate("/login")
+  const renderAuthForm = () => navigate("/historique")
 
   const renderCodeForm = () => (
     <>
