@@ -35,7 +35,7 @@ function CookieConsent() {
         <ModalBody>Ce site utilise des cookies pour vous garantir la meilleure expérience sur notre site.</ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={handleClose}>
+          <Button aria-label="d'accord" colorScheme="blue" mr={3} onClick={handleClose}>
             D'accord
           </Button>
         </ModalFooter>

@@ -23,7 +23,7 @@ function SignIn() {
       })
       .then(response => {
         // setUser(response.data) // Mettre à jour le contexte utilisateur avec les données de l'utilisateur
-        localStorage.setItem("user", JSON.stringify(response.data.user))
+        localStorage.setItem("user", JSON.stringify(response.data))
         localStorage.setItem("token", response.data.token)
 
         toast({

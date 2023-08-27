@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import { Flex, Input, Button } from "@chakra-ui/react"
+import { Flex, Input, Button, FormControl, FormLabel, Heading, Stack, useColorModeValue } from "@chakra-ui/react"
 import axios from "axios"
-import { FormControl, FormLabel, Heading, Stack, useColorModeValue } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 
 export default function UserProfileEdit() {
@@ -14,15 +13,39 @@ export default function UserProfileEdit() {
     firstName: "",
     lastName: "",
     phoneNumber: ""
-    // Add any other properties you wish to include
   })
+
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/10")
-        setUserData(response.data)
-      } catch (error) {
-        console.error("Error fetching data:", error)
+      const userData = localStorage.getItem("user")
+      let user = null
+
+      // Check if userData is not null and not the string 'undefined'
+      if (userData && userData !== "undefined") {
+        try {
+          user = JSON.parse(userData)
+        } catch (error) {
+          console.error("Invalid JSON:", error)
+        }
+      } else {
+        console.log("User not found in localStorage")
+        return // Exit if user not found or invalid
+      }
+
+      const token = localStorage.getItem("token")
+      const userId = user ? user.id : null
+
+      if (token && userId) {
+        try {
+          const response = await axios.get(`https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          })
+          setUserData(response.data)
+        } catch (error) {
+          console.error("Error fetching data:", error)
+        }
+      } else {
+        console.log("No token or user ID found")
       }
     }
     fetchData()
@@ -41,13 +64,17 @@ export default function UserProfileEdit() {
   }
 
   const handleSubmit = async () => {
+    const token = localStorage.getItem("token")
     try {
-      await axios.put("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/10", userData)
+      await axios.put(`https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/${userData.id}`, userData, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       console.log("Data updated successfully")
     } catch (error) {
-      console.error("Error updating data:", error.response.data) // Log full error response
+      console.error("Error updating data:", error.response.data)
     }
   }
+
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
       <Stack spacing={4} w={"full"} maxW={"md"} bg={useColorModeValue("white", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
@@ -55,30 +82,28 @@ export default function UserProfileEdit() {
           User Profile Edit
         </Heading>
         <FormControl id="userName" isRequired>
-          <FormLabel>User name</FormLabel>
-          <Input name="firstName" value={userData.firstName || ""} onChange={handleInputChange} placeholder="First Name" />
+          <FormLabel aria-label="User First Name">User name</FormLabel>
+          <Input aria-label="First Name Input" name="firstName" value={userData.firstName || ""} onChange={handleInputChange} placeholder="First Name" />
         </FormControl>
         <FormControl id="lastName" isRequired>
-          <FormLabel>Last name </FormLabel>
-          <Input name="lastName" value={userData.lastName || ""} onChange={handleInputChange} placeholder="Last Name" />
+          <FormLabel aria-label="User Last Name">Last name</FormLabel>
+          <Input aria-label="Last Name Input" name="lastName" value={userData.lastName || ""} onChange={handleInputChange} placeholder="Last Name" />
         </FormControl>
         <FormControl id="email" isRequired>
-          <FormLabel>email</FormLabel>
-          <Input name="email" value={userData.email || ""} onChange={handleInputChange} placeholder="Email" />
+          <FormLabel aria-label="User Email">Email</FormLabel>
+          <Input aria-label="Email Input" name="email" value={userData.email || ""} onChange={handleInputChange} placeholder="Email" />
         </FormControl>
-
         <FormControl id="address" isRequired>
-          <FormLabel>address</FormLabel>
-          <Input name="address" value={userData.address || ""} onChange={handleInputChange} placeholder="Address" />
+          <FormLabel aria-label="User Address">Address</FormLabel>
+          <Input aria-label="Address Input" name="address" value={userData.address || ""} onChange={handleInputChange} placeholder="Address" />
         </FormControl>
-
         <FormControl id="phoneNumber" isRequired>
-          <FormLabel>phoneNumber</FormLabel>
-          <Input name="phoneNumber" value={userData.phoneNumber || ""} onChange={handleInputChange} placeholder="Phone Number" />
+          <FormLabel aria-label="User Phone Number">Phone Number</FormLabel>
+          <Input aria-label="Phone Number Input" name="phoneNumber" value={userData.phoneNumber || ""} onChange={handleInputChange} placeholder="Phone Number" />
         </FormControl>
-
         <Stack spacing={6} direction={["column", "row"]}>
           <Button
+            aria-label="Cancel Button"
             bg={"red.400"}
             color={"white"}
             w="full"
@@ -90,6 +115,7 @@ export default function UserProfileEdit() {
             Cancel
           </Button>
           <Button
+            aria-label="Submit Button"
             bg={"blue.400"}
             color={"white"}
             w="full"

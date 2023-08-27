@@ -5,11 +5,11 @@ export const AccordionItems = ({ question, answer }) => {
     <>
       <AccordionItem>
         <h2>
-          <AccordionButton>
+          <AccordionButton aria-label={`Toggle information for ${question}`}>
             <Box as="span" flex="1" textAlign="left">
               {question}
             </Box>
-            <AccordionIcon />
+            <AccordionIcon aria-hidden="true" />
           </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>{answer}</AccordionPanel>

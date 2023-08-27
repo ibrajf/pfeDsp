@@ -4,14 +4,12 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 
 export default function CheckcodeNav() {
   const { colorMode, toggleColorMode } = useColorMode()
-  // const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <>
-      <Box bg={useColorModeValue("#FFFAF0", "gray.900")} px={5} w="100%">
+      <Box bg={useColorModeValue("#FFFAF0", "gray.900")} px={5} w="100%" aria-label="Navigation bar">
         <Flex h={99} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>
-            
-          </Box>
+          <Box>{/* Empty box */}</Box>
           <Box>
             <Link href="/">
               <Image src={`${logo}`} alt="Logo ThéTipTop" w="170px" />
@@ -20,7 +18,9 @@ export default function CheckcodeNav() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button onClick={toggleColorMode}>{colorMode === "light" ? <MoonIcon /> : <SunIcon />}</Button>
+              <Button onClick={toggleColorMode} aria-label={`Toggle to ${colorMode === "light" ? "dark" : "light"} mode`}>
+                {colorMode === "light" ? <MoonIcon aria-hidden="true" /> : <SunIcon aria-hidden="true" />}
+              </Button>
             </Stack>
           </Flex>
         </Flex>
