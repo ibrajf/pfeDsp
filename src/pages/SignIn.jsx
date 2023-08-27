@@ -4,6 +4,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useToast } from "@chakra-ui/react"
+import { Helmet } from "react-helmet"
 
 function SignIn() {
   const navigate = useNavigate()
@@ -45,33 +46,41 @@ function SignIn() {
   }
 
   return (
-    <Box spacing={4} mx={"auto"} maxW={"500px"} bg={useColorModeValue("#FFFAF0", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
-      <Heading marginBottom="20px" textAlign={"center"}>
-        Connexion
-      </Heading>
-      <form onSubmit={handleSubmit}>
-        <Stack spacing="20px">
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input type="email" placeholder="Enter your email" onChange={e => setCredentials({ ...credentials, email: e.target.value })} />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Mot de passe</FormLabel>
-            <Input type="password" placeholder="Enter your password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
-          </FormControl>
-          {error && <Text color="red.500">{error}</Text>} {/* Afficher l'erreur si elle existe */}
-          <Button type="submit" colorScheme="teal">
-            Se connecter
-          </Button>
-          <Button leftIcon={<FcGoogle />} variant="outline" colorScheme="teal">
-            Se connecter avec Gmail
-          </Button>
-        </Stack>
-      </form>
-      <Link href="/signup" color="teal.500" mt="20px">
-        Vous n'avez pas de compte? Inscrivez-vous !
-      </Link>
-    </Box>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta name="description" content="Connectez-vous à votre compte Thé Tip Top pour participez aux jeux concours exceptionnels. Commencez à jouer, accumulez des points et tentez de remporter des récompenses fantastiques." />
+        <title>Connexion - Thé Tip Top</title>
+      </Helmet>
+
+      <Box spacing={4} mx={"auto"} maxW={"500px"} bg={useColorModeValue("#FFFAF0", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
+        <Heading marginBottom="20px" textAlign={"center"}>
+          Connexion
+        </Heading>
+        <form onSubmit={handleSubmit}>
+          <Stack spacing="20px">
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input type="email" placeholder="Enter your email" onChange={e => setCredentials({ ...credentials, email: e.target.value })} />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Mot de passe</FormLabel>
+              <Input type="password" placeholder="Enter your password" onChange={e => setCredentials({ ...credentials, password: e.target.value })} />
+            </FormControl>
+            {error && <Text color="red.500">{error}</Text>} {/* Afficher l'erreur si elle existe */}
+            <Button type="submit" colorScheme="teal">
+              Se connecter
+            </Button>
+            <Button leftIcon={<FcGoogle />} variant="outline" colorScheme="teal">
+              Se connecter avec Gmail
+            </Button>
+          </Stack>
+        </form>
+        <Link href="/signup" color="teal.500" mt="20px">
+          Vous n'avez pas de compte? Inscrivez-vous !
+        </Link>
+      </Box>
+    </>
   )
 }
 

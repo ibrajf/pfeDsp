@@ -8,11 +8,15 @@ export default function WithBackgroundImage() {
   const trackButtonClick = useAnalyticsEventTracker("Button Click", "Participer Maintenant Click") // Initialize the analytics hook
 
   const handleButtonClick = () => {
-    trackButtonClick("Button Click", "Participer Maintenant Click") // Track the button click event
-    // Additional logic you want to execute on button click
-    // if (localStorage.getItem("token").length) {
-    //   navigate("/checkCode")
-    // }
+    trackButtonClick("Button Click", "Participer Maintenant Click")
+
+    // Check if the token exists in localStorage and is not empty
+    const token = localStorage.getItem("token")
+    if (token && token.length > 0) {
+      navigate("/checkCode")
+    } else {
+      navigate("/login")
+    }
   }
 
   return (
@@ -23,7 +27,7 @@ export default function WithBackgroundImage() {
             Jouez pour découvrir des arômes inattendus et des récompenses gourmandes!
           </Text>
           <Stack direction={"row"}>
-            <Link href="/login">
+            <Link>
               <Button
                 bg={"whiteAlpha.300"}
                 rounded={"full"}
