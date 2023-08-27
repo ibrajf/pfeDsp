@@ -6,6 +6,10 @@ import { Helmet } from "react-helmet" // Importer Helmet pour gérer les balises
 const MentionsLegales = () => {
   return (
     <>
+      <Helmet>
+        <title>Mentions Légales - Thé Tip Top</title>
+        <meta name="description" content="Read the legal information about Thé Tip Top company." />
+      </Helmet>
       <div className="faq-header">
         <Hero title="Mentions Légales" />
       </div>

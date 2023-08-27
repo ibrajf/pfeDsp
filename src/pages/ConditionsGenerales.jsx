@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Center, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from "@chakra-ui/react"
+import { Box, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon } from "@chakra-ui/react"
 import Hero from "../components/shared/Hero"
 import { Helmet } from "react-helmet" // Importer Helmet pour gérer les balises <head>
 
@@ -7,6 +7,7 @@ const ConditionsGenerales = () => {
   return (
     <>
       <Helmet>
+        <title>Conditions Generales - Thé Tip Top</title>
         <meta name="description" content="Les Conditions Générales de Vente et d'Utilisation de ThéTipTop. Découvrez nos termes et conditions pour l'utilisation de nos services et l'achat de nos produits." />
       </Helmet>
 
