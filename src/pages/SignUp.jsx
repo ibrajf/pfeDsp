@@ -39,9 +39,11 @@ function SignUp() {
     const dataToSend = { ...formValues, password: hashedPassword }
 
     axios
-      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users", dataToSend)
+      .post("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users", dataToSend)
       .then(response => {
         console.log("User created successfully:", response.data)
+        
+
         toast({
           title: "Compte créé.",
           description: "Bienvenue sur TheTipTop ! Connectez-vous et obtenez votre prix.",
@@ -53,6 +55,7 @@ function SignUp() {
       })
       .catch(error => {
         console.error("An error occurred while creating the user:", error)
+        console.log("Data to Send:", dataToSend);
         toast({
           title: "Account creation failed.",
           description: "There was an issue creating your account. Please try again.",

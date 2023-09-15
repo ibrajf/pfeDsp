@@ -1,11 +1,6 @@
-# Base image
-FROM node:latest
-
-# Set the working directory
+FROM node:14
 WORKDIR /app
-
-# Copy package.json and package-lock.json files
-COPY package*.json ./
-
-# Start the application
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
 CMD ["npm", "start"]

@@ -14,7 +14,7 @@ import Checkcode from "./pages/CheckCode"
 import Configuration from "./pages/Configuration"
 // import NotreHistoire from "./components/NotreHistoire"
 import PageError from "./pages/PageError"
-// import CookieConsent from "./components/CookieConsent"
+import CookieConsent from "./components/CookieConsent"
 // import Auth from "./context/Auth"
 // import { hasAuthenticated } from "./services/AuthApi"
 import SignIn from "./pages/SignIn"
@@ -45,7 +45,7 @@ function App() {
             <Route path="/mentionLegales" element={<MentionsLegales />} />
             <Route path="*" element={<PageError />} />
           </Routes>
-          {/* <CookieConsent /> */}
+          <CookieConsent />
         </Layout>
       </Router>
     </ChakraProvider>
