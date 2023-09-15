@@ -32,6 +32,7 @@ function SignUp() {
 
   const handleSubmit = e => {
     e.preventDefault()
+    console.log("hello")
 
     if (!validateForm()) return
 
