@@ -1,6 +1,6 @@
 import React from "react"
-import { Center, Button, useColorModeValue } from "@chakra-ui/react"
-import { Table, Thead, Tbody, Tfoot, Tr, Th, Td, TableCaption, TableContainer } from "@chakra-ui/react"
+import { Center } from "@chakra-ui/react"
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "@chakra-ui/react"
 import historiques from "../services/historique"
 import Hero from "./shared/Hero"
 
@@ -16,7 +16,7 @@ const historique = () => {
           {/* Rest of the historique content */}
           <TableContainer>
             <Table variant="striped" colorScheme="gray">
-              <TableCaption>Tables des prix</TableCaption>
+              {/* <TableCaption>Tables des prix</TableCaption> */}
               <Thead>
                 <Tr>
                   <Th>Date</Th>
@@ -30,23 +30,23 @@ const historique = () => {
                     <Td>{item.Date}</Td>
                     <Td>{item.Code}</Td>
                     <Td>{item.Prix}</Td>
-                    <Td>
+                    {/* <Td>
                       <Center>
                         <Button color={useColorModeValue("whiteAlpha.900", "#995414")} bg={useColorModeValue("#995414", "whiteAlpha.900")}>
                           Récupérer le prix
                         </Button>
                       </Center>
-                    </Td>
+                    </Td> */}
                   </Tr>
                 ))}
               </Tbody>
-              <Tfoot>
+              {/* <Tfoot>
                 <Tr>
                   <Th>Date</Th>
                   <Th>Code</Th>
                   <Th>Prix gagné</Th>
                 </Tr>
-              </Tfoot>
+              </Tfoot> */}
             </Table>
           </TableContainer>
         </div>

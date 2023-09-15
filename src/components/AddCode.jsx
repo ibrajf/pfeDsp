@@ -15,7 +15,7 @@ function AddCodeModal() {
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Participer </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ModalCode />

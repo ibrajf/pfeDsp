@@ -39,7 +39,7 @@ function SignUp() {
     const dataToSend = { ...formValues, password: hashedPassword }
 
     axios
-      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users", dataToSend)
+      .post("http://localhost:8000/api/users", dataToSend)
       .then(response => {
         console.log("User created successfully:", response.data)
         toast({

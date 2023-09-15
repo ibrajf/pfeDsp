@@ -16,7 +16,7 @@ export default function Simple() {
 
     // Envoi d'une requête POST à l'API avec l'adresse email
     axios
-      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/newsletters", {
+      .post("http://localhost:8000/api/newsletters", {
         email: email
       })
       .then(() => {

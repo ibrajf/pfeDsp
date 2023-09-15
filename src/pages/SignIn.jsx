@@ -17,7 +17,7 @@ function SignIn() {
     e.preventDefault()
 
     axios
-      .post("https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/login", credentials, {
+      .post("http://localhost:8000/api/login", credentials, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -40,7 +40,6 @@ function SignIn() {
         window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })
       .catch(error => {
-        console.log(error.response.data)
         setError("Email or password is incorrect") // Vous pouvez personnaliser ce message d'erreur
       })
   }

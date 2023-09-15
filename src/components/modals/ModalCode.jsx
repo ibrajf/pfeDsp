@@ -1,14 +1,18 @@
 import { Field, Form, Formik } from "formik"
-import { FormControl, FormLabel, FormErrorMessage, Input, IconButton, Button } from "@chakra-ui/react"
+import { FormControl, FormLabel, FormErrorMessage, Input, Button, useDisclosure } from "@chakra-ui/react"
 import { FiPlusCircle } from "react-icons/fi"
+import { useNavigate } from "react-router-dom"
 
-function FormikExample({ onClose }) {
+function FormikExample() {
+  const navigate = useNavigate()
+  const { onClose } = useDisclosure()
+
   function validateCode(value) {
     let error
     if (!value) {
       error = "Un code est requis"
-    } else if (value.length !== 10) {
-      error = "Veuillez entrer un code de 10 chiffres SVP"
+    } else if (value.length !== 6 || value !== "123456") {
+      error = "Code incorrect"
     }
     return error
   }
@@ -18,9 +22,16 @@ function FormikExample({ onClose }) {
       initialValues={{ name: "" }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          // Add any form submission logic here if needed
-
-          // Close the modal after form submission
+          // Check if the code is correct
+          if (values.name === "123456") {
+            // Navigate to the history page
+            navigate("/historique")
+            // Close the modal
+            onClose()
+          } else {
+            // Show an error message
+            actions.setFieldError("name", "Code incorrect")
+          }
 
           actions.setSubmitting(false)
         }, 1000)
@@ -32,7 +43,7 @@ function FormikExample({ onClose }) {
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.name && form.touched.name}>
                 <FormLabel>Composer votre code</FormLabel>
-                <Input {...field} placeholder="Code de 10 caractère" />
+                <Input {...field} placeholder="Code de 6 caractères" />
                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
               </FormControl>
             )}
