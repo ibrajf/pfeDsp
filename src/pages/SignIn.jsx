@@ -40,9 +40,13 @@ function SignIn() {
         window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })
       .catch(error => {
-        console.log(error.response.data)
-        setError("Email or password is incorrect") // Vous pouvez personnaliser ce message d'erreur
-      })
+        // Ajoutez ces lignes pour déboguer l'erreur
+        console.log("Erreur complète:", error);
+        console.log("Données d'erreur:", error.response ? error.response.data : 'La réponse est indéfinie');
+  
+        // Votre gestion d'erreur existante
+        setError("Email or password is incorrect");
+      });
   }
 
   return (

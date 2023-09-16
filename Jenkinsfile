@@ -20,19 +20,19 @@ pipeline {
             }
         }
 
-        // stage('Checkout') {
-        //     steps {
-        //         checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
-        //     }
-        // }
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'http://195.20.246.7:3301/devopsgroupe4/frontend.git']]])
+            }
+        }
 
-        // // Add a new stage for pulling changes from Gitea
-        // stage('Pull Changes from Gitea') {
-        //     steps {
-        //         sh "git config --global --add safe.directory /home/myApp/frontend"
-        //         sh "cd /home/myApp/frontend && git pull origin main"
-        //     }
-        // }
+        // Add a new stage for pulling changes from Gitea
+        stage('Pull Changes from Gitea') {
+            steps {
+                sh "git config --global --add safe.directory /home/myApp/frontend"
+                sh "cd /home/myApp/frontend && git pull origin main"
+            }
+        }
 
         // stage('Build Docker Image') {
         //     steps {
