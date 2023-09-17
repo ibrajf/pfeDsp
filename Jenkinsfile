@@ -62,7 +62,7 @@ pipeline {
         script {
             def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
             def prodContainerName = 'myapp-prod'
-            def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
+            def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
 
             // Vérification de l'existence de l'image
             def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
