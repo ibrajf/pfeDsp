@@ -57,11 +57,11 @@ pipeline {
         }
 
 
-stage('Publish to prod') {
+     stage('Publish to prod') {
     steps {
         script {
             def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-            def prodContainerName = 'myapp'
+            def prodContainerName = 'myapp-prod'
             def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
 
             // Vérification de l'existence de l'image
@@ -73,22 +73,31 @@ stage('Publish to prod') {
                     image.pull()
                 }
             } catch (Exception e) {
-                echo "Image not found in registry. Will proceed to the next steps."
+                echo "L'image n'a pas été trouvée dans le registre. Nous allons passer aux étapes suivantes."
             }
 
             docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                def image = docker.image(imageName)
-                image.tag(prodImageName)
-                image.push()
+                try {
+                    def image = docker.image(imageName)
+                    image.tag(prodImageName)
+                    image.push()
+                } catch (Exception e) {
+                    echo "Erreur lors du tag ou du push de l'image : ${e.getMessage()}"
+                }
             }
 
             // Commandes de déploiement pour la production
-            sh "docker stop ${prodContainerName} || true"
-            sh "docker rm ${prodContainerName} || true"
-            sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
+            try {
+                sh "docker stop ${prodContainerName} || true"
+                sh "docker rm ${prodContainerName} || true"
+                sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
+            } catch (Exception e) {
+                echo "Erreur lors du déploiement en production : ${e.getMessage()}"
+            }
         }
     }
 }
+
 
         // stage('Deploy to Prod') {
         //     steps {
