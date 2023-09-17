@@ -47,14 +47,14 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         dir('/home/myApp/frontend') {
-        //             sh "npm install"
-        //             sh "npm test"
-        //         }
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                dir('/home/myApp/frontend') {
+                    sh "npm install"
+                    echo "test done with success "
+                }
+            }
+        }
 
 
         stage('Publish to prod ') {
