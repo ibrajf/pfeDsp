@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-                    def preprodContainerName = 'myapp-preprod'
+                    def preprodContainerName = 'myapp'
                     def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:${appVersion}-${env.GIT_COMMIT}"
 
                     def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
