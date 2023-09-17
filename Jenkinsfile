@@ -57,25 +57,37 @@ pipeline {
         }
 
 
-     stage('Publish to prod') {
+stage('Deploy to prod') {
     steps {
         script {
             def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-            def prodContainerName = 'myapp_react-app'
-            def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+            def prodContainerName = 'myapp-prod'
+            def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
+
+            // Se connecter à Docker Hub
+            try {
+                sh "docker login -u devopsgroupe4 -p devopsgroupe4"
+            } catch (Exception e) {
+                echo "Erreur lors de la connexion à Docker Hub: ${e.getMessage()}"
+                return
+            }
 
             // Vérification de l'existence de l'image
             def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
-            try {
-                docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                    def image = docker.image(imageName)
-                    image.pull()
+            // Si l'image n'existe pas, la tirer du registre
+            if (!imageExists) {
+                try {
+                    docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+                        def image = docker.image(imageName)
+                        image.pull()
+                    }
+                } catch (Exception e) {
+                    echo "L'image n'a pas été trouvée dans le registre. Nous allons passer aux étapes suivantes."
                 }
-            } catch (Exception e) {
-                echo "L'image n'a pas été trouvée dans le registre. Nous allons passer aux étapes suivantes."
             }
 
+            // Tagger et pousser l'image sur Docker Hub
             docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
                 try {
                     def image = docker.image(imageName)
@@ -83,6 +95,7 @@ pipeline {
                     image.push()
                 } catch (Exception e) {
                     echo "Erreur lors du tag ou du push de l'image : ${e.getMessage()}"
+                    return
                 }
             }
 
@@ -97,6 +110,7 @@ pipeline {
         }
     }
 }
+
 
 
         // stage('Deploy to Prod') {
