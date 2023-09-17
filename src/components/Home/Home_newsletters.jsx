@@ -64,7 +64,7 @@ export default function Simple() {
               type={state === "success" ? "button" : "submit"}
             >
               {/* Change le contenu du bouton en fonction de l'état (partie du changement) */}
-              {state === "success" ? <CheckIcon /> : "Envoyer"}
+              {state === "success" ? <CheckIcon /> : "Envoyer ✉"}
             </Button>
           </FormControl>
         </Stack>
