@@ -108,6 +108,46 @@ pipeline {
             }
         }
 
+stage('Deploy to prod if changed') {
+    steps {
+        script {
+            def imageName = "myapp-react-app:${appVersion}-${env.GIT_COMMIT}"
+            def prodImageName = "devopsgroupe4/myapp_react-app-prod:latest"
+
+            // Se connecter à Docker Hub
+            try {
+                sh "docker login -u devopsgroupe4 -p devopsgroupe4"
+            } catch (Exception e) {
+                echo "Erreur lors de la connexion à Docker Hub: ${e.getMessage()}"
+                return
+            }
+
+            // Obtenir le digest de l'image locale
+            def localDigest = sh(returnStdout: true, script: "docker images --digests | grep $imageName | awk '{print $3}'").trim()
+
+            // Obtenir le digest de l'image sur Docker Hub
+            def remoteDigest = ''
+            try {
+                remoteDigest = sh(returnStdout: true, script: "docker pull $prodImageName --quiet | sed -n 's/.*sha256:\\([0-9a-f]*\\).*/\\1/p'").trim()
+            } catch (Exception e) {
+                echo "Erreur lors de la récupération du digest à distance: ${e.getMessage()}"
+            }
+
+            if (localDigest != remoteDigest) {
+                // Tagger et pousser l'image
+                try {
+                    sh "docker tag $imageName $prodImageName"
+                    sh "docker push $prodImageName"
+                } catch (Exception e) {
+                    echo "Erreur lors du tag ou du push de l'image: ${e.getMessage()}"
+                    return
+                }
+            } else {
+                echo "Pas de changements dans l'image, rien à pousser."
+            }
+        }
+    }
+}
 
 
         // stage('Deploy to Prod') {
