@@ -32,6 +32,7 @@ function SignUp() {
 
   const handleSubmit = e => {
     e.preventDefault()
+    console.log("hello")
 
     if (!validateForm()) return
 
@@ -39,7 +40,11 @@ function SignUp() {
     const dataToSend = { ...formValues, password: hashedPassword }
 
     axios
+<<<<<<< HEAD
+      .post("http://localhost:8000/api/users", dataToSend)
+=======
       .post("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users", dataToSend)
+>>>>>>> cdfbcd37f8ea3d0bcead70055917566f90061188
       .then(response => {
         console.log("User created successfully:", response.data)
         

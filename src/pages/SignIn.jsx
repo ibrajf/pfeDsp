@@ -41,12 +41,12 @@ function SignIn() {
       })
       .catch(error => {
         // Ajoutez ces lignes pour déboguer l'erreur
-        console.log("Erreur complète:", error);
-        console.log("Données d'erreur:", error.response ? error.response.data : 'La réponse est indéfinie');
-  
+        console.log("Erreur complète:", error)
+        console.log("Données d'erreur:", error.response ? error.response.data : "La réponse est indéfinie")
+
         // Votre gestion d'erreur existante
-        setError("Email or password is incorrect");
-      });
+        setError("Email or password is incorrect")
+      })
   }
 
   return (
