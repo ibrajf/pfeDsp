@@ -24,7 +24,7 @@ export default function WithBackgroundImage() {
       <VStack w={"full"} justify={"center"} px={useBreakpointValue({ base: 4, md: 8 })} bgGradient={"linear(to-r, blackAlpha.600, transparent)"}>
         <Stack maxW={"2xl"} align={"center"} spacing={6}>
           <Text color={"white"} fontWeight={700} lineHeight={1.2} align={"center"} fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })} aria-label="Promotional Text">
-            Jouez pour découvrir des arômes inattendus et des récompenses gourmandes!!!!!!!!!
+            Jouez pour découvrir des arômes inattendus et des récompenses gourmandes
           </Text>
           <Stack direction={"row"}>
             <Link>
@@ -36,7 +36,7 @@ export default function WithBackgroundImage() {
                 onClick={handleButtonClick} // Attach the tracking function to onClick event
                 aria-label="Participate Now Button"
               >
-                Participer Maintenant ✅ !
+                Participer Maintenant 🡪
               </Button>
             </Link>
           </Stack>
