@@ -61,7 +61,7 @@ pipeline {
     steps {
         script {
             def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-            def prodContainerName = 'myapp-prod'
+            def prodContainerName = 'myapp_react-app'
             def prodImageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
 
             // Vérification de l'existence de l'image
