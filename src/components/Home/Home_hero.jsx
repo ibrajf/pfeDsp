@@ -36,7 +36,7 @@ export default function WithBackgroundImage() {
                 onClick={handleButtonClick} // Attach the tracking function to onClick event
                 aria-label="Participate Now Button"
               >
-                Participer Maintenant ✅
+                Participer Maintenant ✅ !
               </Button>
             </Link>
           </Stack>
