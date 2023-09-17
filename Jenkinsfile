@@ -57,59 +57,56 @@ pipeline {
         }
 
 
-stage('Deploy to prod') {
-    steps {
-        script {
-            def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-            def prodContainerName = 'myapp-prod'
-            def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
+        stage('Deploy to prod') {
+            steps {
+                script {
+                    def imageName = "myapp-react-app:${appVersion}-${env.GIT_COMMIT}"
+                    def prodContainerName = 'myapp-prod'
+                    def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
 
-            // Se connecter à Docker Hub
-            try {
-                sh "docker login -u devopsgroupe4 -p devopsgroupe4"
-            } catch (Exception e) {
-                echo "Erreur lors de la connexion à Docker Hub: ${e.getMessage()}"
-                return
-            }
-
-            // Vérification de l'existence de l'image
-            def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
-
-            // Si l'image n'existe pas, la tirer du registre
-            if (!imageExists) {
-                try {
-                    docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                        def image = docker.image(imageName)
-                        image.pull()
+                    // Step 1: Se connecter à Docker Hub
+                    try {
+                        sh "docker login -u devopsgroupe4 -p devopsgroupe4"
+                    } catch (Exception e) {
+                        echo "Erreur lors de la connexion à Docker Hub: ${e.getMessage()}"
+                        return
                     }
-                } catch (Exception e) {
-                    echo "L'image n'a pas été trouvée dans le registre. Nous allons passer aux étapes suivantes."
-                }
-            }
 
-            // Tagger et pousser l'image sur Docker Hub
-            docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                try {
-                    def image = docker.image(imageName)
-                    image.tag(prodImageName)
-                    image.push()
-                } catch (Exception e) {
-                    echo "Erreur lors du tag ou du push de l'image : ${e.getMessage()}"
-                    return
-                }
-            }
+                    // Step 2: Vérification de l'existence de l'image
+                    def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
+                    
+                    if (!imageExists) {
+                        echo "L'image $imageName n'existe pas localement."
+                        return
+                    }
+                    
+                    // Step 3: Tagger l'image
+                    try {
+                        sh "docker tag $imageName $prodImageName"
+                    } catch (Exception e) {
+                        echo "Erreur lors du tag de l'image : ${e.getMessage()}"
+                        return
+                    }
+                    
+                    // Step 4: Pousser l'image sur Docker Hub
+                    try {
+                        sh "docker push $prodImageName"
+                    } catch (Exception e) {
+                        echo "Erreur lors du push de l'image : ${e.getMessage()}"
+                        return
+                    }
 
-            // Commandes de déploiement pour la production
-            try {
-                sh "docker stop ${prodContainerName} || true"
-                sh "docker rm ${prodContainerName} || true"
-                sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
-            } catch (Exception e) {
-                echo "Erreur lors du déploiement en production : ${e.getMessage()}"
+                    // Step 5: Commandes de déploiement pour la production
+                    try {
+                        sh "docker stop ${prodContainerName} || true"
+                        sh "docker rm ${prodContainerName} || true"
+                        sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
+                    } catch (Exception e) {
+                        echo "Erreur lors du déploiement en production : ${e.getMessage()}"
+                    }
+                }
             }
         }
-    }
-}
 
 
 
