@@ -66,9 +66,9 @@ pipeline {
 
                     def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
-                    if (imageExists) {
-                        echo "Image $imageName is already present. Skipping Deploy to Preprod stage."
-                    } else {
+                    // if (imageExists) {
+                    //     echo "Image $imageName is already present. Skipping Deploy to Preprod stage."
+                    // } else {
                         docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
                             def image = docker.image(imageName)
                             image.pull()
@@ -81,7 +81,7 @@ pipeline {
                         sh "docker rm ${preprodContainerName} || true"
                         sh "docker run -d --name ${preprodContainerName} -p 8080:80 ${preprodImageName}"
                     }
-                }
+                // }
             }
         }
 
