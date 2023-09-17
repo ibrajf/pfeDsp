@@ -64,12 +64,12 @@ pipeline {
                     def preprodContainerName = 'myapp-preprod'
                     def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:${appVersion}-${env.GIT_COMMIT}"
 
-                    def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
+                    // def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
               
                         docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
                             def image = docker.image(imageName)
-                            image.pull()
+                            // image.pull()
                             image.tag(preprodImageName)
                             image.push()
                         }
