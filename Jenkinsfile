@@ -57,97 +57,59 @@ pipeline {
         }
 
 
-        stage('Deploy to prod') {
-            steps {
-                script {
-                    def imageName = "myapp-react-app:${appVersion}-${env.GIT_COMMIT}"
-                    def prodContainerName = 'myapp-prod'
-                    def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
-
-                    // Step 1: Se connecter à Docker Hub
-                    try {
-                        sh "docker login -u devopsgroupe4 -p devopsgroupe4"
-                    } catch (Exception e) {
-                        echo "Erreur lors de la connexion à Docker Hub: ${e.getMessage()}"
-                        return
-                    }
-
-                    // Step 2: Vérification de l'existence de l'image
-                    def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
-                    
-                    if (!imageExists) {
-                        echo "L'image $imageName n'existe pas localement."
-                        return
-                    }
-                    
-                    // Step 3: Tagger l'image
-                    try {
-                        sh "docker tag $imageName $prodImageName"
-                    } catch (Exception e) {
-                        echo "Erreur lors du tag de l'image : ${e.getMessage()}"
-                        return
-                    }
-                    
-                    // Step 4: Pousser l'image sur Docker Hub
-                    try {
-                        sh "docker push $prodImageName"
-                    } catch (Exception e) {
-                        echo "Erreur lors du push de l'image : ${e.getMessage()}"
-                        return
-                    }
-
-                    // Step 5: Commandes de déploiement pour la production
-                    try {
-                        sh "docker stop ${prodContainerName} || true"
-                        sh "docker rm ${prodContainerName} || true"
-                        sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
-                    } catch (Exception e) {
-                        echo "Erreur lors du déploiement en production : ${e.getMessage()}"
-                    }
-                }
-            }
-        }
-
-stage('Deploy to prod if changed') {
+stage('Publish to prod') {
     steps {
         script {
-            def imageName = "myapp-react-app:${appVersion}-${env.GIT_COMMIT}"
-            def prodImageName = "devopsgroupe4/myapp_react-app-prod:latest"
+            def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+            def prodContainerName = 'myapp-prod'
+            def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
+            def latestImageName = "devopsgroupe4/myapp_react-app-prod:latest"
 
-            // Se connecter à Docker Hub
-            try {
-                sh "docker login -u devopsgroupe4 -p devopsgroupe4"
-            } catch (Exception e) {
-                echo "Erreur lors de la connexion à Docker Hub: ${e.getMessage()}"
-                return
-            }
+            // Login to Docker Hub
+            sh "docker login -u devopsgroupe4 -p devopsgroupe4"
 
-            // Obtenir le digest de l'image locale
-            def localDigest = sh(returnStdout: true, script: "docker images --digests | grep $imageName | awk '{print $3}'").trim()
+            // Check if image exists locally
+            def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
-            // Obtenir le digest de l'image sur Docker Hub
-            def remoteDigest = ''
-            try {
-                remoteDigest = sh(returnStdout: true, script: "docker pull $prodImageName --quiet | sed -n 's/.*sha256:\\([0-9a-f]*\\).*/\\1/p'").trim()
-            } catch (Exception e) {
-                echo "Erreur lors de la récupération du digest à distance: ${e.getMessage()}"
-            }
-
-            if (localDigest != remoteDigest) {
-                // Tagger et pousser l'image
+            if (!imageExists) {
+                echo "Image doesn't exist locally. Attempting to pull."
                 try {
-                    sh "docker tag $imageName $prodImageName"
-                    sh "docker push $prodImageName"
+                    docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+                        def image = docker.image(imageName)
+                        image.pull()
+                    }
                 } catch (Exception e) {
-                    echo "Erreur lors du tag ou du push de l'image: ${e.getMessage()}"
-                    return
+                    echo "Image not found in registry. Moving on to next steps."
                 }
-            } else {
-                echo "Pas de changements dans l'image, rien à pousser."
+            }
+
+            // Tag and push the image to prod
+            docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+                try {
+                    def image = docker.image(imageName)
+                    image.tag(prodImageName)
+                    image.tag(latestImageName)  // Tagging the image as latest
+                    image.push()
+                    image.push('latest')  // Pushing the latest tag
+                } catch (Exception e) {
+                    echo "Error tagging or pushing image: ${e.getMessage()}"
+                }
+            }
+
+            // Deployment commands for prod
+            try {
+                sh "docker stop ${prodContainerName} || true"
+                sh "docker rm ${prodContainerName} || true"
+                sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
+            } catch (Exception e) {
+                echo "Error deploying to prod: ${e.getMessage()}"
             }
         }
     }
 }
+
+
+
 
 
         // stage('Deploy to Prod') {
