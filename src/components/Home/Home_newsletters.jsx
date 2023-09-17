@@ -16,7 +16,7 @@ export default function Simple() {
 
     // Envoi d'une requête POST à l'API avec l'adresse email
     axios
-      .post("http://localhost:8000/api/newsletters", {
+      .post("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/newsletters", {
         email: email
       })
       .then(() => {

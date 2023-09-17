@@ -17,7 +17,7 @@ function SignIn() {
     e.preventDefault()
 
     axios
-      .post("http://localhost:8000/api/login", credentials, {
+      .post("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/login", credentials, {
         headers: {
           "Content-Type": "application/json"
         }
@@ -40,7 +40,12 @@ function SignIn() {
         window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })
       .catch(error => {
-        setError("Email or password is incorrect") // Vous pouvez personnaliser ce message d'erreur
+        // Ajoutez ces lignes pour déboguer l'erreur
+        console.log("Erreur complète:", error)
+        console.log("Données d'erreur:", error.response ? error.response.data : "La réponse est indéfinie")
+
+        // Votre gestion d'erreur existante
+        setError("Email or password is incorrect")
       })
   }
 

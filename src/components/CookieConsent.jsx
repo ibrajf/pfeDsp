@@ -25,14 +25,15 @@ function CookieConsent() {
         // Custom CSS to place the Modal at the bottom left of the screen
         style={{
           position: "fixed",
-          bottom: 0,
-          left: 0,
+          bottom:' 50%',
+          left:'35%',
           margin: 0,
-          width: "auto"
+          width: "1500px"
         }}
       >
         <ModalCloseButton />
-        <ModalBody>Ce site utilise des cookies pour vous garantir la meilleure expérience sur notre site.</ModalBody>
+        <ModalBody> Ce site web est fictif et a été créé uniquement à des fins éducatives et de démonstration. Aucun produit ou service réel n'est offert ici. Toutes les informations et les éléments présents sur ce site sont simulés. Merci de ne pas fournir d'informations personnelles ou sensibles.
+.</ModalBody>
 
         <ModalFooter>
           <Button aria-label="d'accord" colorScheme="blue" mr={3} onClick={handleClose}>

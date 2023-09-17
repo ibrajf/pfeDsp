@@ -1,10 +1,51 @@
-import React from "react"
-import { Center } from "@chakra-ui/react"
+import jwt_decode from "jwt-decode"
+import axios from "axios"
+import React, { useState, useEffect } from "react"
+import { Center, Button, useColorModeValue } from "@chakra-ui/react"
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "@chakra-ui/react"
-import historiques from "../services/historique"
 import Hero from "./shared/Hero"
+const Historique = () => {
+  const [historiques, setHistoriques] = useState([])
+  const token = localStorage.getItem("token")
+  const userInfo = jwt_decode(token)
 
-const historique = () => {
+  const requestData = {
+    customer_id: userInfo.username,
+    id: userInfo.id
+  }
+
+  useEffect(() => {
+    axios
+      .get("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/codes", {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => {
+        console.log(response.data)
+
+        const filteredData = []
+
+        response.data.forEach(item => {
+          if (!item.customer) return
+
+          const customerId = parseInt(item.customer.split("/")[3])
+          console.log("id  ", parseInt(item.customer.split("/")[3]))
+          console.log("token  ", requestData.id)
+          if (customerId === requestData.id) {
+            filteredData.push(item)
+          }
+        })
+
+        setHistoriques(filteredData)
+        console.log(filteredData)
+      })
+      .catch(error => {
+        console.error("An error occurred:", error)
+      })
+  }, []) // Empty dependency array means this useEffect runs once when the component mounts
+
   return (
     <>
       <div className="faq-header">
@@ -16,7 +57,6 @@ const historique = () => {
           {/* Rest of the historique content */}
           <TableContainer>
             <Table variant="striped" colorScheme="gray">
-              {/* <TableCaption>Tables des prix</TableCaption> */}
               <Thead>
                 <Tr>
                   <Th>Date</Th>
@@ -27,26 +67,21 @@ const historique = () => {
               <Tbody>
                 {historiques.map((item, index) => (
                   <Tr key={index}>
-                    <Td>{item.Date}</Td>
-                    <Td>{item.Code}</Td>
-                    <Td>{item.Prix}</Td>
-                    {/* <Td>
+                    <Td>{item && item.date_attribue ? item.date_attribue.split("T")[0] : "N/A"}</Td>
+                    <Td>{item.code}</Td>
+                    <Td>{item.prize}</Td>
+                    <Td> Utilisé </Td>
+                    <Td>
                       <Center>
                         <Button color={useColorModeValue("whiteAlpha.900", "#995414")} bg={useColorModeValue("#995414", "whiteAlpha.900")}>
                           Récupérer le prix
                         </Button>
                       </Center>
-                    </Td> */}
+                    </Td>{" "}
+                    */}
                   </Tr>
                 ))}
               </Tbody>
-              {/* <Tfoot>
-                <Tr>
-                  <Th>Date</Th>
-                  <Th>Code</Th>
-                  <Th>Prix gagné</Th>
-                </Tr>
-              </Tfoot> */}
             </Table>
           </TableContainer>
         </div>
@@ -55,4 +90,4 @@ const historique = () => {
   )
 }
 
-export default historique
+export default Historique
