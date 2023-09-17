@@ -5,15 +5,19 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 import AddCodeModal from "../AddCode"
 import { useNavigate } from "react-router"
 import { useToast } from "@chakra-ui/react"
+import jwt_decode from "jwt-decode";
+
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate()
   const toast = useToast()
 
+
+
   const signOut = () => {
     localStorage.removeItem("token")
-
+    localStorage.removeItem("user")
     toast({
       title: "Goodbye!",
       description: "See you again.",
@@ -22,9 +26,13 @@ export default function Nav() {
       isClosable: true,
       position: "top-right"
     })
-
+    window.location.reload()
     navigate("/")
   }
+
+
+
+
 
   return (
     <>
@@ -56,7 +64,7 @@ export default function Nav() {
                       </Center>
                       <br />
                       <Center>
-                        <p>Username</p>
+                        <p>Mon Profil </p>
                       </Center>
                       <br />
                       <MenuDivider />

@@ -36,7 +36,7 @@ export default function Footer() {
       <Container as={Stack} maxW={"6xl"} py={4} spacing={4} justify={"center"} align={"center"}>
         <Stack direction={"row"} spacing={6}>
           <Box as="a" href={"/"} aria-label="Home">
-            Home
+            Acceuil
           </Box>
           <Box as="a" href={"/blog"} aria-label="Blog">
             Blog
@@ -58,7 +58,7 @@ export default function Footer() {
 
       <Box borderTopWidth={1} borderStyle={"solid"} borderColor={useColorModeValue("#573f25", "gray.700")}>
         <Container as={Stack} maxW={"6xl"} py={4} direction={{ base: "column", md: "row" }} spacing={4} justify={{ base: "center", md: "space-between" }} align={{ base: "center", md: "center" }}>
-          <Text>© 2023 FuriousDucks</Text>
+          <Text>© 2023 Thétiptop</Text>
           <Stack direction={"row"} spacing={6}>
             <SocialButton label={"LinkedIn"} href={"#"}>
               <FaLinkedin />

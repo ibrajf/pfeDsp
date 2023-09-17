@@ -3,6 +3,8 @@ import { Box, Input, Button, useColorModeValue } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import jwt_decode from "jwt-decode";
+import { IconButton } from '@chakra-ui/icons'; // Importez l'icône ArrowBackIcon
+
 
 const CheckCodeForm = () => {
   const [codeInput, setCodeInput] = useState('');
@@ -27,10 +29,7 @@ const CheckCodeForm = () => {
       id : userInfo.id
     };
 
-    console.log(requestData.customer_id);
-    console.log(requestData.code);
-    console.log(requestData.id);
-  
+
     axios
       .post(
         `https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/codes/validation`, 
@@ -53,7 +52,10 @@ const CheckCodeForm = () => {
         setErrorMessage('Code incorrect. Veuillez réessayer.');
       });
   };
-  
+
+  const navigateToHome = () => {
+    navigate('/');
+  };
 
   return (
     <Box 
@@ -71,6 +73,8 @@ const CheckCodeForm = () => {
       boxShadow={"xl"} 
       borderRadius={10}
     >
+
+
       <Box 
         aria-label="Description text" 
         textAlign="center" 
@@ -101,21 +105,38 @@ const CheckCodeForm = () => {
               Participer
             </Button>
           </Box>
+
+          {errorMessage && (
+        <Box 
+          aria-live="polite" 
+          display="flex" 
+          justifyContent="center"
+          color='red'
+        >
+          {errorMessage}
+        </Box>
+      )}
+
+          <Box display="flex" justifyContent="center" mt={20}>
+    <Button 
+              aria-label="revenir a l accueil" 
+              colorScheme='teal' 
+              variant='outline'
+              size="md" 
+              onClick={navigateToHome} 
+              width="auto"
+            >
+              Revenir a l'accueil
+            </Button>
+       
+      </Box>
         </>
       ) : (
         // Vous pouvez ajouter ce qui doit être affiché lorsque showAuth est vrai
         console.log("yes")
       )}
 
-      {errorMessage && (
-        <Box 
-          aria-live="polite" 
-          display="flex" 
-          justifyContent="center"
-        >
-          {errorMessage}
-        </Box>
-      )}
+
     </Box>
   );
 };

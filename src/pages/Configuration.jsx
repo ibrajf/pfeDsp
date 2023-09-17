@@ -1,46 +1,32 @@
 import { useEffect, useState } from "react"
-import { Flex, Input, Button, FormControl, FormLabel, Heading, Stack, useColorModeValue } from "@chakra-ui/react"
+import { Flex, Input, Button, FormControl, FormLabel, Heading, Stack, useColorModeValue , Box } from "@chakra-ui/react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { useToast } from "@chakra-ui/react"
+import jwt_decode from "jwt-decode";
 
 export default function UserProfileEdit() {
+  const toast = useToast()
   const navigate = useNavigate()
   const [userData, setUserData] = useState({
-    id: null,
     email: "",
-    address: "",
-    codes: [],
     firstName: "",
     lastName: "",
-    phoneNumber: ""
   })
 
+  const token = localStorage.getItem("token")
+  const userId = jwt_decode(token)
   useEffect(() => {
     const fetchData = async () => {
-      const userData = localStorage.getItem("user")
-      let user = null
-
-      // Check if userData is not null and not the string 'undefined'
-      if (userData && userData !== "undefined") {
-        try {
-          user = JSON.parse(userData)
-        } catch (error) {
-          console.error("Invalid JSON:", error)
-        }
-      } else {
-        console.log("User not found in localStorage")
-        return // Exit if user not found or invalid
-      }
-
-      const token = localStorage.getItem("token")
-      const userId = user ? user.id : null
 
       if (token && userId) {
         try {
-          const response = await axios.get(`https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/${userId}`, {
+          const response = await axios.get(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, {
             headers: { Authorization: `Bearer ${token}` }
           })
           setUserData(response.data)
+
+          console.log(response.data)
         } catch (error) {
           console.error("Error fetching data:", error)
         }
@@ -64,16 +50,63 @@ export default function UserProfileEdit() {
   }
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem("token")
     try {
-      await axios.put(`https://symfony.dsp-archiwebo21a-wd-ij-ma.fr/api/users/${userData.id}`, userData, {
+      await axios.put(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, userData, {
         headers: { Authorization: `Bearer ${token}` }
       })
-      console.log("Data updated successfully")
+      .then(()=>{
+        window.location.reload()
+        toast({
+          title: "Modification",
+          description: "Votre profil est bien modifié",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right"
+        })
+      })
+
     } catch (error) {
       console.error("Error updating data:", error.response.data)
     }
   }
+
+
+
+  // const handleDelete = async () => {
+  //   try {
+  //     // Effectuer la requête DELETE
+  //     const response = await axios.delete(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+      
+  //     // Si la requête est réussie, affichez un toast et naviguez vers la page d'accueil
+  //     if (response.status === 200) {
+  //       toast({
+  //         title: "Deleted",
+  //         description: "Votre profil est supprimé",
+  //         status: "error",
+  //         duration: 9000,
+  //         isClosable: true,
+  //         position: "top-right",
+  //       });
+  //       localStorage.removeItem("token")
+  //       navigate("/");
+  //     }
+  //   } catch (error) {
+  //     // Afficher l'erreur dans la console et informer l'utilisateur via un toast
+  //     console.error("Error:", error.response);
+  //     toast({
+  //       title: "An error occurred",
+  //       description: "Could not delete your profile. Please try again later.",
+  //       status: "error",
+  //       duration: 9000,
+  //       isClosable: true,
+  //       position: "top-right",
+  //     });
+  //   }
+  // };
+  
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
@@ -93,14 +126,7 @@ export default function UserProfileEdit() {
           <FormLabel aria-label="User Email">Email</FormLabel>
           <Input aria-label="Email Input" name="email" value={userData.email || ""} onChange={handleInputChange} placeholder="Email" />
         </FormControl>
-        <FormControl id="address" isRequired>
-          <FormLabel aria-label="User Address">Address</FormLabel>
-          <Input aria-label="Address Input" name="address" value={userData.address || ""} onChange={handleInputChange} placeholder="Address" />
-        </FormControl>
-        <FormControl id="phoneNumber" isRequired>
-          <FormLabel aria-label="User Phone Number">Phone Number</FormLabel>
-          <Input aria-label="Phone Number Input" name="phoneNumber" value={userData.phoneNumber || ""} onChange={handleInputChange} placeholder="Phone Number" />
-        </FormControl>
+
         <Stack spacing={6} direction={["column", "row"]}>
           <Button
             aria-label="Cancel Button"
@@ -126,6 +152,21 @@ export default function UserProfileEdit() {
           >
             Submit
           </Button>
+
+          {/* <Box>
+          <Button
+            aria-label="Cancel Button"
+            bg={"red.400"}
+            color={"white"}
+            w="full"
+            _hover={{
+              bg: "red.500"
+            }}
+            onClick={handleDelete}
+          >
+            Supprimer le compte
+          </Button>
+          </Box> */}
         </Stack>
       </Stack>
     </Flex>

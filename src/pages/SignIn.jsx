@@ -37,7 +37,7 @@ function SignIn() {
         })
 
         navigate("/checkcode")
-        window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
+        // window.location.reload() // this will force a page reload, and thus the Routes will re-evaluate.
       })
       .catch(error => {
         // Ajoutez ces lignes pour déboguer l'erreur
