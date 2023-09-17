@@ -66,19 +66,19 @@ const CheckCodeForm = () => {
           </Box>
           <Box display="flex" justifyContent="center">
             <Button aria-label="Submit code" colorScheme="blue" size="md" onClick={handleSubmit} width="300px">
-              Participer ✅
+              Participer ✓
             </Button>
           </Box>
 
           {errorMessage && (
             <Box aria-live="polite" display="flex" justifyContent="center" color="red">
-              {errorMessage} ❌
+              ❌ {errorMessage}
             </Box>
           )}
 
           <Box display="flex" justifyContent="center" mt={20}>
             <Button aria-label="revenir a l accueil" colorScheme="teal" variant="outline" size="md" onClick={navigateToHome} width="auto">
-              🏡 Revenir a l'accueil
+              ↶ Revenir a l'accueil
             </Button>
           </Box>
         </>
