@@ -57,57 +57,31 @@ pipeline {
         }
 
 
-stage('Publish to prod') {
-    steps {
-        script {
-            def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-            def prodContainerName = 'myapp-prod'
-            def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
-            def latestImageName = "devopsgroupe4/myapp_react-app-prod:latest"
+       stage('Deploy to Preprod') {
+            steps {
+                script {
+                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+                    def preprodContainerName = 'myapp-preprod'
+                    def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:${appVersion}-${env.GIT_COMMIT}"
 
-            // Login to Docker Hub
-            sh "docker login -u devopsgroupe4 -p devopsgroupe4"
+                    def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
-            // Check if image exists locally
-            def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
+              
+                        docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+                            def image = docker.image(imageName)
+                            image.pull()
+                            image.tag(preprodImageName)
+                            image.push()
+                        }
 
-            if (!imageExists) {
-                echo "Image doesn't exist locally. Attempting to pull."
-                try {
-                    docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                        def image = docker.image(imageName)
-                        image.pull()
-                    }
-                } catch (Exception e) {
-                    echo "Image not found in registry. Moving on to next steps."
+                        // Deployment commands for Preprod
+                        sh "docker stop ${preprodContainerName} || true"
+                        sh "docker rm ${preprodContainerName} || true"
+                        sh "docker run -d --name ${preprodContainerName} -p 8080:80 ${preprodImageName}"
+                    
                 }
-            }
-
-            // Tag and push the image to prod
-            docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                try {
-                    def image = docker.image(imageName)
-                    image.tag(prodImageName)
-                    image.tag(latestImageName)  // Tagging the image as latest
-                    image.push()
-                    image.push('latest')  // Pushing the latest tag
-                } catch (Exception e) {
-                    echo "Error tagging or pushing image: ${e.getMessage()}"
-                }
-            }
-
-            // Deployment commands for prod
-            try {
-                sh "docker stop ${prodContainerName} || true"
-                sh "docker rm ${prodContainerName} || true"
-                sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
-            } catch (Exception e) {
-                echo "Error deploying to prod: ${e.getMessage()}"
             }
         }
-    }
-}
-
 
 
 
