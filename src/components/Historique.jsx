@@ -1,53 +1,51 @@
-import jwt_decode from "jwt-decode";
-import axios from "axios";
-import React, { useState , useEffect } from "react";
-import { Center, Button, useColorModeValue } from "@chakra-ui/react";
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "@chakra-ui/react";
-import Hero from "./shared/Hero";
+import jwt_decode from "jwt-decode"
+import axios from "axios"
+import React, { useState, useEffect } from "react"
+import { Center, Button, useColorModeValue } from "@chakra-ui/react"
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "@chakra-ui/react"
+import Hero from "./shared/Hero"
 const Historique = () => {
-
-  const [historiques, setHistoriques] = useState([]);
-  const token = localStorage.getItem('token');
-  const userInfo = jwt_decode(token);
+  const [historiques, setHistoriques] = useState([])
+  const token = localStorage.getItem("token")
+  const userInfo = jwt_decode(token)
 
   const requestData = {
     customer_id: userInfo.username,
-    id : userInfo.id
-  };
+    id: userInfo.id
+  }
 
   useEffect(() => {
-    axios.get("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/codes", {
-      headers: {
-        "accept": "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-    .then(response => {
-      console.log(response.data)
-      
-      const filteredData = [];
-
-      response.data.forEach(item => {
-        if (!item.customer) return;
-    
-        const customerId = parseInt(item.customer.split('/')[3]);
-        console.log('id  ' , parseInt(item.customer.split('/')[3]))
-        console.log('token  ' , requestData.id);
-        if (customerId === requestData.id) {
-          
-          filteredData.push(item);
+    axios
+      .get("https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/codes", {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json"
         }
-      });
-    
-      setHistoriques(filteredData);
-      console.log(filteredData)
-    })
-    .catch(error => {
-      console.error("An error occurred:", error);
-    });
-    
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
-  
+      })
+      .then(response => {
+        console.log(response.data)
+
+        const filteredData = []
+
+        response.data.forEach(item => {
+          if (!item.customer) return
+
+          const customerId = parseInt(item.customer.split("/")[3])
+          console.log("id  ", parseInt(item.customer.split("/")[3]))
+          console.log("token  ", requestData.id)
+          if (customerId === requestData.id) {
+            filteredData.push(item)
+          }
+        })
+
+        setHistoriques(filteredData)
+        console.log(filteredData)
+      })
+      .catch(error => {
+        console.error("An error occurred:", error)
+      })
+  }, []) // Empty dependency array means this useEffect runs once when the component mounts
+
   return (
     <>
       <div className="faq-header">
@@ -60,7 +58,6 @@ const Historique = () => {
           <TableContainer>
             <Table variant="striped" colorScheme="gray">
               <Thead>
-
                 <Tr>
                   <Th>Date</Th>
                   <Th>Code</Th>
@@ -71,7 +68,6 @@ const Historique = () => {
                 {historiques.map((item, index) => (
                   <Tr key={index}>
                     <Td>{item && item.date_attribue ? item.date_attribue.split("T")[0] : "N/A"}</Td>
-                  
                     <Td>{item.code}</Td>
                     <Td>{item.prize}</Td>
                     <Td> Utilisé </Td>
@@ -81,11 +77,11 @@ const Historique = () => {
                           Récupérer le prix
                         </Button>
                       </Center>
-                    </Td>
+                    </Td>{" "}
+                    */}
                   </Tr>
                 ))}
               </Tbody>
-
             </Table>
           </TableContainer>
         </div>
