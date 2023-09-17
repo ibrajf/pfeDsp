@@ -78,7 +78,6 @@ const Historique = () => {
                         </Button>
                       </Center>
                     </Td>{" "}
-                    */}
                   </Tr>
                 ))}
               </Tbody>
