@@ -57,33 +57,38 @@ pipeline {
         }
 
 
-        stage('Publish to prod ') {
-            steps {
-                script {
-                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
-                    def preprodContainerName = 'myapp'
-                    def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:${appVersion}-${env.GIT_COMMIT}"
+stage('Publish to prod') {
+    steps {
+        script {
+            def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
+            def prodContainerName = 'myapp'
+            def prodImageName = "devopsgroupe4/myapp_react-app-prod:${appVersion}-${env.GIT_COMMIT}"
 
-                    def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
+            // Vérification de l'existence de l'image
+            def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
-                    // if (imageExists) {
-                    //     echo "Image $imageName is already present. Skipping Deploy to Preprod stage."
-                    // } else {
-                        docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
-                            def image = docker.image(imageName)
-                            image.pull()
-                            image.tag(preprodImageName)
-                            image.push()
-                        }
-
-                        // Deployment commands for Preprod
-                        sh "docker stop ${preprodContainerName} || true"
-                        sh "docker rm ${preprodContainerName} || true"
-                        sh "docker run -d --name ${preprodContainerName} -p 8080:80 ${preprodImageName}"
-                    }
-                // }
+            try {
+                docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+                    def image = docker.image(imageName)
+                    image.pull()
+                }
+            } catch (Exception e) {
+                echo "Image not found in registry. Will proceed to the next steps."
             }
+
+            docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
+                def image = docker.image(imageName)
+                image.tag(prodImageName)
+                image.push()
+            }
+
+            // Commandes de déploiement pour la production
+            sh "docker stop ${prodContainerName} || true"
+            sh "docker rm ${prodContainerName} || true"
+            sh "docker run -d --name ${prodContainerName} -p 8080:80 ${prodImageName}"
         }
+    }
+}
 
         // stage('Deploy to Prod') {
         //     steps {
