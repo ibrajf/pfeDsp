@@ -57,19 +57,21 @@ pipeline {
         }
 
 
-       stage('Deploy to Preprod') {
+        stage('Deploy to Preprod') {
             steps {
                 script {
-                    def imageName = "devopsgroupe4/myapp_react-app:latest"
+                    def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
                     def preprodContainerName = 'myapp-preprod'
-                    def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:latest"
+                    def preprodImageName = "devopsgroupe4/myapp_react-app-preprod:${appVersion}-${env.GIT_COMMIT}"
 
-                    // def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
+                    def imageExists = sh(returnStdout: true, script: "docker images -q $imageName").trim()
 
-              
+                    if (imageExists) {
+                        echo "Image $imageName is already present. Skipping Deploy to Preprod stage."
+                    } else {
                         docker.withRegistry('https://index.docker.io/v1/', 'Docker') {
                             def image = docker.image(imageName)
-                            // image.pull()
+                            image.pull()
                             image.tag(preprodImageName)
                             image.push()
                         }
@@ -78,7 +80,7 @@ pipeline {
                         sh "docker stop ${preprodContainerName} || true"
                         sh "docker rm ${preprodContainerName} || true"
                         sh "docker run -d --name ${preprodContainerName} -p 8080:80 ${preprodImageName}"
-                    
+                    }
                 }
             }
         }
