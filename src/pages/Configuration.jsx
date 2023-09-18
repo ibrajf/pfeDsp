@@ -74,20 +74,20 @@ export default function UserProfileEdit() {
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
       <Stack spacing={4} w={"full"} maxW={"md"} bg={useColorModeValue("white", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
         <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-          User Profile Edit
+          Modifier Mon profil
         </Heading>
 
-        <FormControl id="email" isRequired>
-          <FormLabel aria-label="User Email">Email</FormLabel>
+        <FormControl id="email">
+          <FormLabel aria-label="User Email">Mon Email</FormLabel>
           <Text>{userData.email || ""}</Text>
         </FormControl>
 
         <FormControl id="userName" isRequired>
-          <FormLabel aria-label="User First Name">User name</FormLabel>
+          <FormLabel aria-label="User First Name">Prénom</FormLabel>
           <Input aria-label="First Name Input" name="firstName" value={userData.firstName || ""} onChange={handleInputChange} placeholder="First Name" />
         </FormControl>
         <FormControl id="lastName" isRequired>
-          <FormLabel aria-label="User Last Name">Last name</FormLabel>
+          <FormLabel aria-label="User Last Name">Nom</FormLabel>
           <Input aria-label="Last Name Input" name="lastName" value={userData.lastName || ""} onChange={handleInputChange} placeholder="Last Name" />
         </FormControl>
 
@@ -102,7 +102,7 @@ export default function UserProfileEdit() {
             }}
             onClick={handleCancel}
           >
-            Cancel
+            Annuler
           </Button>
           <Button
             aria-label="Submit Button"
@@ -114,7 +114,7 @@ export default function UserProfileEdit() {
             }}
             onClick={handleSubmit}
           >
-            Submit
+            Modifier
           </Button>
         </Stack>
       </Stack>
