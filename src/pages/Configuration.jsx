@@ -72,48 +72,19 @@ export default function UserProfileEdit() {
   }
 
 
-
-  // const handleDelete = async () => {
-  //   try {
-  //     // Effectuer la requête DELETE
-  //     const response = await axios.delete(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, {
-  //       headers: { Authorization: `Bearer ${token}` },
-  //     });
-      
-  //     // Si la requête est réussie, affichez un toast et naviguez vers la page d'accueil
-  //     if (response.status === 200) {
-  //       toast({
-  //         title: "Deleted",
-  //         description: "Votre profil est supprimé",
-  //         status: "error",
-  //         duration: 9000,
-  //         isClosable: true,
-  //         position: "top-right",
-  //       });
-  //       localStorage.removeItem("token")
-  //       navigate("/");
-  //     }
-  //   } catch (error) {
-  //     // Afficher l'erreur dans la console et informer l'utilisateur via un toast
-  //     console.error("Error:", error.response);
-  //     toast({
-  //       title: "An error occurred",
-  //       description: "Could not delete your profile. Please try again later.",
-  //       status: "error",
-  //       duration: 9000,
-  //       isClosable: true,
-  //       position: "top-right",
-  //     });
-  //   }
-  // };
-  
-
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
       <Stack spacing={4} w={"full"} maxW={"md"} bg={useColorModeValue("white", "gray.700")} rounded={"xl"} boxShadow={"lg"} p={6} my={12}>
         <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
           User Profile Edit
         </Heading>
+
+        <FormControl id="email" isRequired>
+          <FormLabel aria-label="User Email">Email</FormLabel>
+          <Input  aria-label="Email Input" name="email" value={userData.email || ""} onChange={handleInputChange} placeholder="Email"  disabled/>
+        </FormControl>
+
+
         <FormControl id="userName" isRequired>
           <FormLabel aria-label="User First Name">User name</FormLabel>
           <Input aria-label="First Name Input" name="firstName" value={userData.firstName || ""} onChange={handleInputChange} placeholder="First Name" />
@@ -122,10 +93,7 @@ export default function UserProfileEdit() {
           <FormLabel aria-label="User Last Name">Last name</FormLabel>
           <Input aria-label="Last Name Input" name="lastName" value={userData.lastName || ""} onChange={handleInputChange} placeholder="Last Name" />
         </FormControl>
-        <FormControl id="email" isRequired>
-          <FormLabel aria-label="User Email">Email</FormLabel>
-          <Input aria-label="Email Input" name="email" value={userData.email || ""} onChange={handleInputChange} placeholder="Email" />
-        </FormControl>
+       
 
         <Stack spacing={6} direction={["column", "row"]}>
           <Button
@@ -153,20 +121,6 @@ export default function UserProfileEdit() {
             Submit
           </Button>
 
-          {/* <Box>
-          <Button
-            aria-label="Cancel Button"
-            bg={"red.400"}
-            color={"white"}
-            w="full"
-            _hover={{
-              bg: "red.500"
-            }}
-            onClick={handleDelete}
-          >
-            Supprimer le compte
-          </Button>
-          </Box> */}
         </Stack>
       </Stack>
     </Flex>
