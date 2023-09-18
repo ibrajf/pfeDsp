@@ -40,15 +40,15 @@ const TestimonialContent = props => {
   )
 }
 
-const TestimonialHeading = props => {
-  const { children } = props
+// const TestimonialHeading = props => {
+//   const { children } = props
 
-  return (
-    <Heading as={"h3"} fontSize={"xl"}>
-      {children}
-    </Heading>
-  )
-}
+//   return (
+//     <Heading as={"h3"} fontSize={"xl"}>
+//       {children}
+//     </Heading>
+//   )
+// }
 
 const TestimonialText = props => {
   const { children } = props
@@ -86,19 +86,19 @@ export default function WithSpeechBubbles() {
             <TestimonialContent>
               <TestimonialText>Jouer et gagner avec ThéTipTop, c'est un plaisir ! J'adore les récompenses théinées, c'est une super idée.</TestimonialText>
             </TestimonialContent>
-            <TestimonialAvatar src={"https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"} name={"Victor"} />
+            <TestimonialAvatar src={"https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1899&q=80"} name={"Victor"} />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
               <TestimonialText>Gagner un coffret découverte d'une valeur de 39€ grâce au jeu-concours ThéTipTop, c'est un vrai plaisir pour les papilles.</TestimonialText>
             </TestimonialContent>
-            <TestimonialAvatar src={"https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"} name={"Sofia"} />
+            <TestimonialAvatar src={"https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1944&q=80"} name={"Sofia"} />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
               <TestimonialText>Votre jeu-concours est tellement généreux ! J'ai été surprise de remporter un infuseur à thé et je l'adore.</TestimonialText>
             </TestimonialContent>
-            <TestimonialAvatar src={"https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"} name={"Anis"} />
+            <TestimonialAvatar src={"https://images.unsplash.com/photo-1591295967474-278e1aa10ecd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"} name={"Miriam"} />
           </Testimonial>
         </Stack>
       </Container>
