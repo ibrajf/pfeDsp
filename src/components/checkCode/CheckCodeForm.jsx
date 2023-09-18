@@ -43,6 +43,7 @@ const CheckCodeForm = () => {
       .then(response => {
         setShowAuth(true)
         navigate("/historique")
+        window.location.reload()
       })
       .catch(error => {
         setErrorMessage("Code incorrect. Veuillez réessayer.")
