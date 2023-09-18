@@ -1,8 +1,8 @@
-module.exports = {
-    // ... other Jest configuration options ...
-    transform: {
-      // Add a custom transformer for problematic packages/files
-      'node_modules/@adobe/css-tools/dist/index.cjs': 'babel-jest',
-    },
-  };
-  
+export default {
+  // Other Jest configurations...
+
+  // Add this line to transform ES modules
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+  },
+};
