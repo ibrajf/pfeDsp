@@ -57,7 +57,7 @@ pipeline {
         }
 
 
-        stage('Deploy to Preprod') {
+        stage('Publish to Preprod') {
             steps {
                 script {
                     def imageName = "devopsgroupe4/myapp_react-app:${appVersion}-${env.GIT_COMMIT}"
