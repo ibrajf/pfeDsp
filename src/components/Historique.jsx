@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode"
 import axios from "axios"
 import React, { useState, useEffect } from "react"
-import { Center, Button, useColorModeValue } from "@chakra-ui/react"
+import { Center, Button } from "@chakra-ui/react"
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "@chakra-ui/react"
 import Hero from "./shared/Hero"
 const Historique = () => {
@@ -32,7 +32,7 @@ const Historique = () => {
 
           const customerId = parseInt(item.customer.split("/")[3])
           console.log("id  ", parseInt(item.customer.split("/")[3]))
-          console.log("token  ", requestData.id)
+          console.log("token  ")
           if (customerId === requestData.id) {
             filteredData.push(item)
           }
@@ -44,7 +44,7 @@ const Historique = () => {
       .catch(error => {
         console.error("An error occurred:", error)
       })
-  }, []) // Empty dependency array means this useEffect runs once when the component mounts
+  }, [requestData.id]) // Empty dependency array means this useEffect runs once when the component mounts
 
   return (
     <>
@@ -73,7 +73,7 @@ const Historique = () => {
                     <Td> Utilisé </Td>
                     <Td>
                       <Center>
-                        <Button color={useColorModeValue("whiteAlpha.900", "#995414")} bg={useColorModeValue("#995414", "whiteAlpha.900")}>
+                        <Button color={("whiteAlpha.900", "#995414")} bg={("#995414", "whiteAlpha.900")}>
                           Récupérer le prix
                         </Button>
                       </Center>
