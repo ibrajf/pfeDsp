@@ -25,14 +25,19 @@ function SignUp() {
     let formErrors = {}
     if (formValues.firstName.length < 3) formErrors.firstName = "Prénom doit comporter au moins 3 caractères."
     if (formValues.lastName.length < 3) formErrors.lastName = "nom doit comporter au moins 3 caractères."
-    if (formValues.password.length < 8) formErrors.password = "Mot de passe doit comporter au moins 8 caractères."
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!passwordRegex.test(formValues.password)) {
+      formErrors.password = "Le mot de passe doit comporter au moins 8 caractères, dont au moins une lettre et un chiffre.";
+  }
+    
     setErrors(formErrors)
     return Object.keys(formErrors).length === 0 // return true if no errors
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log("hello")
+  
 
     if (!validateForm()) return
 

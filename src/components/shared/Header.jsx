@@ -26,8 +26,9 @@ export default function Nav() {
       isClosable: true,
       position: "top-right"
     })
-    window.location.reload()
     navigate("/")
+    window.location.reload()
+   
   }
 
 
