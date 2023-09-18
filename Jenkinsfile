@@ -50,7 +50,7 @@ pipeline {
         stage('Test') {
             steps {
                 dir('/home/myApp/frontend') {
-                    sh "npm install"
+                    sh "npm test"
                     echo "test done with success "
                 }
             }
