@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { Flex, Input, Button, FormControl, FormLabel, Heading, Stack, useColorModeValue , Box } from "@chakra-ui/react"
+import { Flex, Input, Button, FormControl, FormLabel, Heading, Stack, useColorModeValue, Text } from "@chakra-ui/react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { useToast } from "@chakra-ui/react"
-import jwt_decode from "jwt-decode";
+import jwt_decode from "jwt-decode"
 
 export default function UserProfileEdit() {
   const toast = useToast()
@@ -11,14 +11,13 @@ export default function UserProfileEdit() {
   const [userData, setUserData] = useState({
     email: "",
     firstName: "",
-    lastName: "",
+    lastName: ""
   })
 
   const token = localStorage.getItem("token")
   const userId = jwt_decode(token)
   useEffect(() => {
     const fetchData = async () => {
-
       if (token && userId) {
         try {
           const response = await axios.get(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, {
@@ -51,26 +50,25 @@ export default function UserProfileEdit() {
 
   const handleSubmit = async () => {
     try {
-      await axios.put(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, userData, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(()=>{
-        window.location.reload()
-        toast({
-          title: "Modification",
-          description: "Votre profil est bien modifié",
-          status: "success",
-          duration: 9000,
-          isClosable: true,
-          position: "top-right"
+      await axios
+        .put(`https://api.dsp-archiwebo21a-ij-wd-ma.fr/api/users/${userId.id}`, userData, {
+          headers: { Authorization: `Bearer ${token}` }
         })
-      })
-
+        .then(() => {
+          window.location.reload()
+          toast({
+            title: "Modification",
+            description: "Votre profil est bien modifié",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+            position: "top-right"
+          })
+        })
     } catch (error) {
       console.error("Error updating data:", error.response.data)
     }
   }
-
 
   return (
     <Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
@@ -81,9 +79,8 @@ export default function UserProfileEdit() {
 
         <FormControl id="email" isRequired>
           <FormLabel aria-label="User Email">Email</FormLabel>
-          <Input  aria-label="Email Input" name="email" value={userData.email || ""} onChange={handleInputChange} placeholder="Email"  disabled/>
+          <Text>{userData.email || ""}</Text>
         </FormControl>
-
 
         <FormControl id="userName" isRequired>
           <FormLabel aria-label="User First Name">User name</FormLabel>
@@ -93,7 +90,6 @@ export default function UserProfileEdit() {
           <FormLabel aria-label="User Last Name">Last name</FormLabel>
           <Input aria-label="Last Name Input" name="lastName" value={userData.lastName || ""} onChange={handleInputChange} placeholder="Last Name" />
         </FormControl>
-       
 
         <Stack spacing={6} direction={["column", "row"]}>
           <Button
@@ -120,7 +116,6 @@ export default function UserProfileEdit() {
           >
             Submit
           </Button>
-
         </Stack>
       </Stack>
     </Flex>
